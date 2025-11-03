@@ -14,7 +14,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './com
 import { Badge } from './components/ui/badge';
 import { Button } from './components/ui/button';
 import { Scale, HelpCircle } from 'lucide-react';
-import React from 'react';
+
 import { tourService } from './services/tourService';
 
 const steps = [

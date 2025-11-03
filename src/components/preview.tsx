@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { TutelaData } from '../types/tutela';
 import { Button } from './ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
 import { Separator } from './ui/separator';
 import { ScrollArea } from './ui/scroll-area';
-import { Download, Edit, Send, Loader2 } from 'lucide-react';
+import { Download, Edit, Loader2 } from 'lucide-react';
 import { ApiService } from '../services/api';
 import { Alert, AlertDescription } from './ui/alert';
 
@@ -31,33 +31,7 @@ export function Preview({ data, onPrevious, onEdit }: PreviewProps) {
     });
   };
 
-  const handleSubmitToBackend = async () => {
-    setIsSubmitting(true);
-    setSubmitStatus({ type: null, message: '' });
 
-    try {
-      const response = await ApiService.submitTutela(data);
-      
-      if (response.success) {
-        setSubmitStatus({
-          type: 'success',
-          message: response.message
-        });
-      } else {
-        setSubmitStatus({
-          type: 'error',
-          message: response.message
-        });
-      }
-    } catch (error) {
-      setSubmitStatus({
-        type: 'error',
-        message: 'Error inesperado al enviar los datos'
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
 
   const handleGenerateWord = async () => {
     setIsSubmitting(true);
@@ -195,7 +169,7 @@ export function Preview({ data, onPrevious, onEdit }: PreviewProps) {
                       </Button>
                     </div>
                     <ul className="list-disc list-inside space-y-1">
-                      {data.anexos.map((anexo, index) => (
+                      {data.anexos.map((anexo) => (
                         <li key={anexo.id}>
                           {anexo.nombre}
                         </li>
