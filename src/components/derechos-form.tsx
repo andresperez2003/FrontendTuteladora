@@ -114,7 +114,7 @@ export function DerechosForm({ data, onUpdate, onNext, onPrevious }: DerechosFor
         </div>
 
         <div className="flex justify-between pt-4">
-          <Button variant="outline" onClick={onPrevious}>
+          <Button onClick={onPrevious}>
             Anterior
           </Button>
           <Button 

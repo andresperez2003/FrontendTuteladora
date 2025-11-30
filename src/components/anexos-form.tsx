@@ -100,7 +100,7 @@ export function AnexosForm({ data, onUpdate, onNext, onPrevious }: AnexosFormPro
         </Button>
 
         <div className="flex justify-between pt-4">
-          <Button variant="outline" onClick={onPrevious}>
+          <Button onClick={onPrevious}>
             Anterior
           </Button>
           <Button onClick={onNext}>

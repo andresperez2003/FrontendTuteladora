@@ -23,7 +23,6 @@ export class TourService {
       nextBtnText: 'Siguiente',
       prevBtnText: 'Anterior',
       doneBtnText: 'Finalizar',
-      closeBtnText: 'Cerrar',
       steps: []
     });
   }
@@ -73,7 +72,6 @@ export class TourService {
       nextBtnText: 'Siguiente',
       prevBtnText: 'Anterior',
       doneBtnText: 'Finalizar',
-      closeBtnText: 'Cerrar',
       steps: steps.map(step => ({
         element: step.element,
         popover: step.popover
@@ -297,7 +295,7 @@ export class TourService {
       {
         element: '[data-tour="generate-word-button"]',
         popover: {
-          title: 'Generar Word',
+          title: 'Generar Tutela',
           description: 'Haz clic aquí para generar y descargar el documento Word de tu acción de tutela.',
           side: 'top'
         }
@@ -316,7 +314,6 @@ export class TourService {
       nextBtnText: 'Siguiente',
       prevBtnText: 'Anterior',
       doneBtnText: 'Finalizar',
-      closeBtnText: 'Cerrar',
       steps: steps.map(step => ({
         element: step.element,
         popover: step.popover

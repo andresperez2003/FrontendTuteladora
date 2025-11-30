@@ -92,7 +92,7 @@ export function Preview({ data, onPrevious, onEdit }: PreviewProps) {
               <div className="space-y-2">
                 <div className="flex justify-between items-center">
                   <h2 className="text-lg font-semibold">ACCIONANTE</h2>
-                  <Button variant="ghost" size="sm" onClick={() => onEdit(0)} data-tour="edit-buttons">
+                  <Button size="sm" onClick={() => onEdit(0)} data-tour="edit-buttons">
                     <Edit className="w-4 h-4" />
                   </Button>
                 </div>
@@ -107,7 +107,7 @@ export function Preview({ data, onPrevious, onEdit }: PreviewProps) {
               <div className="space-y-2">
                 <div className="flex justify-between items-center">
                   <h2 className="text-lg font-semibold">ACCIONADO</h2>
-                  <Button variant="ghost" size="sm" onClick={() => onEdit(1)}>
+                  <Button size="sm" onClick={() => onEdit(1)}>
                     <Edit className="w-4 h-4" />
                   </Button>
                 </div>
@@ -120,7 +120,7 @@ export function Preview({ data, onPrevious, onEdit }: PreviewProps) {
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
                   <h2 className="text-lg font-semibold">HECHOS</h2>
-                  <Button variant="ghost" size="sm" onClick={() => onEdit(2)}>
+                  <Button size="sm" onClick={() => onEdit(2)}>
                     <Edit className="w-4 h-4" />
                   </Button>
                 </div>
@@ -137,7 +137,7 @@ export function Preview({ data, onPrevious, onEdit }: PreviewProps) {
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
                   <h2 className="text-lg font-semibold">DERECHOS FUNDAMENTALES VULNERADOS</h2>
-                  <Button variant="ghost" size="sm" onClick={() => onEdit(3)}>
+                  <Button size="sm" onClick={() => onEdit(3)}>
                     <Edit className="w-4 h-4" />
                   </Button>
                 </div>
@@ -164,7 +164,7 @@ export function Preview({ data, onPrevious, onEdit }: PreviewProps) {
                   <div className="space-y-2">
                     <div className="flex justify-between items-center">
                       <h2 className="text-lg font-semibold">ANEXOS</h2>
-                      <Button variant="ghost" size="sm" onClick={() => onEdit(4)}>
+                      <Button size="sm" onClick={() => onEdit(4)}>
                         <Edit className="w-4 h-4" />
                       </Button>
                     </div>
@@ -184,7 +184,7 @@ export function Preview({ data, onPrevious, onEdit }: PreviewProps) {
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
                   <h2 className="text-lg font-semibold">PETICIONES</h2>
-                  <Button variant="ghost" size="sm" onClick={() => onEdit(6)}>
+                  <Button size="sm" onClick={() => onEdit(6)}>
                     <Edit className="w-4 h-4" />
                   </Button>
                 </div>
@@ -206,7 +206,7 @@ export function Preview({ data, onPrevious, onEdit }: PreviewProps) {
               <div className="space-y-2">
                 <div className="flex justify-between items-center">
                   <h2 className="text-lg font-semibold">DATOS DE COMUNICACIÓN</h2>
-                  <Button variant="ghost" size="sm" onClick={() => onEdit(5)}>
+                  <Button size="sm" onClick={() => onEdit(5)}>
                     <Edit className="w-4 h-4" />
                   </Button>
                 </div>
@@ -236,7 +236,7 @@ export function Preview({ data, onPrevious, onEdit }: PreviewProps) {
       </Card>
 
       <div className="flex flex-col sm:flex-row justify-between gap-4">
-        <Button variant="outline" onClick={onPrevious}>
+        <Button onClick={onPrevious}>
           Anterior
         </Button>
         
@@ -256,7 +256,7 @@ export function Preview({ data, onPrevious, onEdit }: PreviewProps) {
             ) : (
               <>
                 <Download className="w-4 h-4 mr-2" />
-                Generar Word
+                Generar Tutela
               </>
             )}
           </Button>

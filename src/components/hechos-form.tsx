@@ -164,7 +164,7 @@ export function HechosForm({ data, onUpdate, onNext, onPrevious }: HechosFormPro
           </Button>
 
           <div className="flex justify-between pt-4">
-            <Button variant="outline" onClick={onPrevious}>
+            <Button onClick={onPrevious}>
               Anterior
             </Button>
             <Button 

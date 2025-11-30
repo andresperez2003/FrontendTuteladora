@@ -14,6 +14,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './com
 import { Badge } from './components/ui/badge';
 import { Button } from './components/ui/button';
 import { Scale, HelpCircle } from 'lucide-react';
+import logoImage from './assets/images/Logo.png';
 
 import { tourService } from './services/tourService';
 
@@ -221,25 +222,23 @@ export default function App() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="bg-primary text-primary-foreground py-6" data-tour="header">
+      <div className="bg-primary text-primary-foreground py-2 px-6" data-tour="header">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between ">
             <div className="flex items-center gap-3">
-              <Scale className="w-8 h-8" />
+              <img src={logoImage} alt="Logo" width={60} height={50} />
               <div>
-                <h1 className="text-2xl">La Tuteladora</h1>
-                <p className="text-sm opacity-90">Defensoría del Pueblo - Generador de Acciones de Tutela</p>
+                <h1 className="text-xl">Tuteladora del pueblo</h1>
+                <p className="text-xs opacity-90">Generador de Acciones de Tutela</p>
               </div>
             </div>
             <Button
-              variant="outline"
               size="sm"
               onClick={startTour}
-              className="bg-primary-foreground/10 hover:bg-primary-foreground/20 border-primary-foreground/20 text-primary-foreground hover:text-primary-foreground cursor-pointer"
               data-tour="tour-button"
             >
-              <HelpCircle className="w-4 h-4 mr-2 text-primary-foreground" />
-              <span className="text-primary-foreground">Ayuda</span>
+              <HelpCircle className="w-4 h-4 mr-2" />
+              <span>Ayuda</span>
             </Button>
           </div>
         </div>

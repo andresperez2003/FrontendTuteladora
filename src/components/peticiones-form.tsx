@@ -79,7 +79,7 @@ export function PeticionesForm({ data, onUpdate, onNext, onPrevious }: Peticione
         </div>
 
         <div className="flex justify-between pt-4">
-          <Button variant="outline" onClick={onPrevious}>
+          <Button onClick={onPrevious}>
             Anterior
           </Button>
           <Button 
