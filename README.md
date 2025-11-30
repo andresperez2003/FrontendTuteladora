@@ -4,7 +4,9 @@
   <img src="src/assets/images/Logo.png" alt="Logo Tuteladora" width="150" height="150" />
 </div>
 
-**Tuteladora Action Form** es una aplicación web diseñada para facilitar la generación de acciones de tutela en Colombia. La aplicación guía a los usuarios a través de un proceso paso a paso para completar todos los datos necesarios y generar un documento Word con la accion de tutela listo para presentar.
+**Tuteladora** es una aplicación web diseñada para facilitar la generación de acciones de tutela en Colombia. La aplicación guía a los usuarios a través de un proceso paso a paso para completar todos los datos necesarios y generar un documento Word con la accion de tutela listo para presentar.
+
+> **Backend:** Este proyecto utiliza un backend API para la generación de documentos. El código del backend está disponible en [GeneradorTuteladora](https://github.com/andresperez2003/GeneradorTuteladora).
 
 ---
 
@@ -320,6 +322,18 @@ TuteladoraActionForm/
 
 ## Configuración
 
+### Backend API
+
+Este proyecto requiere un backend API para generar los documentos Word. El backend está disponible en el repositorio:
+
+- **Repositorio del Backend:** [GeneradorTuteladora](https://github.com/andresperez2003/GeneradorTuteladora)
+- **URL de Producción:** `https://generador-tuteladora.vercel.app`
+- **Funcionalidades del Backend:**
+  - Generación de documentos Word (.docx)
+  - Generación de documentos PDF
+  - API REST para integración
+  - Validación de datos de entrada
+
 ### Variables de Entorno
 
 | Variable | Descripción | Valor por Defecto |
@@ -472,8 +486,25 @@ Preview Component
     ↓
 API Service
     ↓
-Backend API
+Backend API (GeneradorTuteladora)
+    ↓
+Documento Word generado
 ```
+
+### Backend
+
+El frontend se comunica con un backend API desarrollado en Node.js que se encarga de:
+
+- **Generación de Documentos:** Crea documentos Word (.docx) con la estructura legal completa de la acción de tutela
+- **Validación de Datos:** Valida la información recibida antes de procesarla
+- **Formato Legal:** Aplica el formato y estructura requeridos legalmente para acciones de tutela en Colombia
+
+**Repositorio del Backend:** [GeneradorTuteladora](https://github.com/andresperez2003/GeneradorTuteladora)
+
+El backend expone los siguientes endpoints principales:
+- `POST /generar-word`: Genera y retorna un documento Word
+- `POST /generar-pdf`: Genera y retorna un documento PDF (opcional)
+- `GET /ejemplo-datos`: Retorna un ejemplo de la estructura de datos esperada
 
 ### Gestión de Estado
 
@@ -505,9 +536,10 @@ Cada paso tiene su propio componente:
 
 - **ApiService** (`src/services/api.ts`): Comunicación con el backend
   - `submitTutela()`: Envía datos al backend
-  - `generateAndDownloadWord()`: Genera y descarga documento Word
+  - `generateAndDownloadWord()`: Genera y descarga documento Word desde el backend
   - `getTutelaStatus()`: Obtiene estado de una tutela
   - `updateTutela()`: Actualiza una tutela existente
+  - **Backend utilizado:** [GeneradorTuteladora](https://github.com/andresperez2003/GeneradorTuteladora)
 
 - **TourService** (`src/services/tourService.ts`): Tours guiados con Driver.js
   - Configura tours para cada paso del formulario
@@ -762,6 +794,108 @@ npm run build        # Construye la aplicación para producción
 3. Commit sus cambios (`git commit -m 'Add some AmazingFeature'`)
 4. Push a la rama (`git push origin feature/AmazingFeature`)
 5. Abra un Pull Request
+
+---
+
+## 🚀 Recomendaciones Futuras
+
+Esta sección describe mejoras y funcionalidades propuestas para futuras versiones del proyecto.
+
+### 🤖 Aprendizaje Automático e IA
+
+#### Generación Automática de Contenido
+
+Implementar un sistema de aprendizaje automático que permita:
+
+- **Generación Automática de Hechos:**
+  - Analizar la información proporcionada por el usuario (derechos vulnerados, tipo de caso, entidad accionada)
+  - Generar sugerencias automáticas de hechos relevantes basados en casos similares
+  - Proporcionar plantillas inteligentes adaptadas al contexto específico
+  - Mejorar la calidad y completitud de los hechos descritos
+
+- **Generación Automática de Peticiones:**
+  - Analizar los hechos y derechos vulnerados para sugerir peticiones apropiadas
+  - Generar automáticamente las solicitudes específicas al juez basadas en el tipo de caso
+  - Asegurar que las peticiones sean legalmente apropiadas y efectivas
+  - Personalizar las peticiones según el contexto del caso
+
+**Tecnologías Sugeridas:**
+- Modelos de lenguaje (LLM) como GPT-4, Claude, o modelos especializados en derecho
+- Fine-tuning de modelos con casos de tutela históricos
+- Análisis de sentencias previas para mejorar las sugerencias
+- NLP (Natural Language Processing) para análisis de texto legal
+
+**Beneficios:**
+- Reducción del tiempo de completado del formulario
+- Mejora en la calidad y precisión de los documentos generados
+- Asistencia a usuarios con menos conocimiento legal
+- Consistencia en la redacción de documentos legales
+
+### 🔐 Seguridad y Autenticación
+
+#### Sistema de Clave Secreta entre Frontend y Backend
+
+Implementar un mecanismo de autenticación seguro para proteger los endpoints del backend:
+
+- **API Key Authentication:**
+  - Generar una clave secreta única para el frontend
+  - Enviar la clave en cada solicitud al backend mediante headers
+  - Validar la clave en el backend antes de procesar cualquier solicitud
+  - Implementar rotación de claves para mayor seguridad
+
+- **Implementación Sugerida:**
+
+**Frontend (`src/services/api.ts`):**
+```typescript
+const API_KEY = import.meta.env.VITE_API_KEY;
+
+static async generateAndDownloadWord(tutelaData: TutelaData): Promise<ApiResponse> {
+  const response = await fetch(`${this.baseURL}/generar-word`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-API-Key': API_KEY, // Clave secreta
+    },
+    body: JSON.stringify(backendData),
+  });
+  // ...
+}
+```
+
+**Backend (Middleware):**
+```javascript
+// Middleware de autenticación
+function validateApiKey(req, res, next) {
+  const apiKey = req.headers['x-api-key'];
+  const validApiKey = process.env.API_SECRET_KEY;
+  
+  if (!apiKey || apiKey !== validApiKey) {
+    return res.status(401).json({ 
+      error: 'Unauthorized: Invalid API key' 
+    });
+  }
+  
+  next();
+}
+
+// Aplicar a rutas protegidas
+app.post('/generar-word', validateApiKey, generarWord);
+app.post('/generar-pdf', validateApiKey, generarPDF);
+```
+
+**Variables de Entorno:**
+
+**Frontend (`.env`):**
+```env
+VITE_API_URL=https://generador-tuteladora.vercel.app
+VITE_API_KEY=tu-clave-secreta-frontend
+```
+
+**Backend (`.env`):**
+```env
+API_SECRET_KEY=tu-clave-secreta-backend
+```
+
 
 
 ## Soporte
