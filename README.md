@@ -1,9 +1,5 @@
 # Tuteladora
 
-<div align="center">
-  <img src="src/assets/images/Logo.png" alt="Logo Tuteladora" width="150" height="150" />
-</div>
-
 **Tuteladora** es una aplicación web diseñada para facilitar la generación de acciones de tutela en Colombia. La aplicación guía a los usuarios a través de un proceso paso a paso para completar todos los datos necesarios y generar un documento Word con la accion de tutela listo para presentar.
 
 > **Backend:** Este proyecto utiliza un backend API para la generación de documentos. El código del backend está disponible en [GeneradorTuteladora](https://github.com/andresperez2003/GeneradorTuteladora).
