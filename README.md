@@ -1,6 +1,6 @@
 # Tuteladora Action Form
 
-![Logo](src/assets/images/Logo.png)
+<img src="src/assets/images/Logo.png" alt="Logo Tuteladora" width="150" height="125" />
 
 **Tuteladora Action Form** es una aplicación web diseñada para facilitar la generación de acciones de tutela en Colombia. La aplicación guía a los usuarios a través de un proceso paso a paso para completar todos los datos necesarios y generar un documento Word listo para presentar.
 
@@ -304,7 +304,7 @@ TuteladoraActionForm/
 │   ├── types/           # Definiciones de TypeScript
 │   │   └── tutela.ts    # Interfaces y tipos
 │   ├── utils/           # Utilidades
-│   │   └── pdf-generator.ts # Generador de PDF (deprecated)
+│   │   └── pdf-generator.ts # Generador de PDF
 │   ├── App.tsx          # Componente principal
 │   ├── main.tsx         # Punto de entrada
 │   └── index.css        # Estilos principales
@@ -763,9 +763,6 @@ npm run build        # Construye la aplicación para producción
 4. Push a la rama (`git push origin feature/AmazingFeature`)
 5. Abra un Pull Request
 
-## Licencia
-
-Este proyecto es privado y de uso interno.
 
 ## Soporte
 
@@ -773,6 +770,6 @@ Para soporte técnico o preguntas, contacte al equipo de desarrollo.
 
 ---
 
-**Versión:** 0.1.0  
-**Última actualización:** 2024
+**Versión:** 1.0.0  
+**Última actualización:** Diciembre 2025
 
