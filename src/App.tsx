@@ -239,7 +239,7 @@ export default function App() {
       />
 
       {/* Content */}
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 pt-8 max-w-4xl">
         <div className="max-w-4xl mx-auto space-y-6">
           {/* Progress */}
           <Card data-tour="progress-card">

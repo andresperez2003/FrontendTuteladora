@@ -68,7 +68,7 @@ export function Participantes() {
       <Navbar />
 
       {/* Contenido */}
-      <div className="container mx-auto px-4 py-12 max-w-4xl">
+      <div className="container mx-auto px-4 py-12 pt-8 max-w-4xl">
 
         {/* Título */}
         <div className="mb-12">
