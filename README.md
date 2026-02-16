@@ -1,6 +1,6 @@
 # Tuteladora
 
-**Tuteladora** es una aplicación web diseñada para facilitar la generación de acciones de tutela en Colombia. La aplicación guía a los usuarios a través de un proceso paso a paso para completar todos los datos necesarios y generar un documento Word con la accion de tutela listo para presentar.
+**Tuteladora** es una aplicación web diseñada para facilitar la generación de acciones de tutela en Colombia. La aplicación ofrece contenido informativo sobre el proceso de tutela y guía a los usuarios a través de un formulario paso a paso para completar todos los datos necesarios y generar un documento Word con la acción de tutela listo para presentar.
 
 > **Backend:** Este proyecto utiliza un backend API para la generación de documentos. El código del backend está disponible en [GeneradorTuteladora](https://github.com/andresperez2003/GeneradorTuteladora).
 
@@ -10,15 +10,17 @@
 
 1. [Manual de Usuario](#manual-de-usuario)
    - [Introducción](#introducción)
+   - [Estructura del Sitio](#estructura-del-sitio)
    - [Requisitos del Sistema](#requisitos-del-sistema)
    - [Acceso a la Aplicación](#acceso-a-la-aplicación)
-   - [Guía Paso a Paso](#guía-paso-a-paso)
+   - [Guía Paso a Paso del Formulario](#guía-paso-a-paso-del-formulario)
    - [Funcionalidades Principales](#funcionalidades-principales)
    - [Solución de Problemas](#solución-de-problemas)
 2. [Manual de Desarrollador](#manual-de-desarrollador)
    - [Requisitos Técnicos](#requisitos-técnicos)
    - [Instalación](#instalación)
    - [Estructura del Proyecto](#estructura-del-proyecto)
+   - [Rutas y Navegación](#rutas-y-navegación)
    - [Configuración](#configuración)
    - [Guía de Desarrollo](#guía-de-desarrollo)
    - [Arquitectura](#arquitectura)
@@ -31,11 +33,54 @@
 
 ## Introducción
 
-Tuteladora Action Form es una herramienta diseñada para ayudar a los ciudadanos colombianos a generar acciones de tutela de manera sencilla y estructurada. La aplicación le guiará a través de 8 pasos para recopilar toda la información necesaria y generar un documento Word profesional.
+Tuteladora es una herramienta integral diseñada para ayudar a los ciudadanos colombianos a comprender y generar acciones de tutela de manera sencilla y estructurada. La aplicación combina contenido educativo con un generador práctico que le guiará a través de 8 pasos para recopilar toda la información necesaria y producir un documento Word profesional.
 
 ### ¿Qué es una Acción de Tutela?
 
 La acción de tutela es un mecanismo constitucional en Colombia que permite a cualquier persona solicitar la protección inmediata de sus derechos fundamentales cuando estos sean vulnerados o amenazados por la acción u omisión de cualquier autoridad pública o particular.
+
+## Estructura del Sitio
+
+La aplicación está organizada en las siguientes secciones:
+
+### 🏠 Página de Inicio (`/`)
+Página principal que presenta la aplicación y sus funcionalidades principales. Desde aquí puede acceder a:
+- Secciones informativas sobre la tutela
+- Enlace directo al formulario de generación
+- Explicación general del servicio
+
+### 📚 ¿Qué es una Tutela? (`/que-es`)
+Sección educativa que explica:
+- Definición y fundamento constitucional de la acción de tutela (Artículo 86)
+- Características principales: inmediata, informal, subsidiaria y preferente
+- Derechos fundamentales que pueden protegerse
+- Propósito y alcance del mecanismo
+
+### 👥 Participantes (`/participantes`)
+Detalla los actores que intervienen en el proceso:
+- **Accionante (Tutelante):** Quien interpone la tutela
+- **Accionado:** Entidad o persona contra quien se dirige
+- **Juez de Tutela:** Autoridad que tramita y decide
+- **Ministerio Público:** Ente que vela por la legalidad
+- Rol específico y funciones de cada participante
+
+### ⚖️ Proceso de Tutela (`/proceso`)
+Explica el paso a paso después de presentar la tutela:
+- Timeline completo del proceso judicial
+- Tiempos estimados para cada etapa
+- Posibles decisiones del juez
+- Recomendaciones y pasos a seguir
+
+### 📝 Generar Tutela (`/tutela`)
+Formulario principal de 8 pasos para crear su acción de tutela:
+1. Datos Personales
+2. Accionado
+3. Hechos
+4. Derechos
+5. Anexos
+6. Comunicación
+7. Peticiones
+8. Previsualización
 
 ## Requisitos del Sistema
 
@@ -47,9 +92,9 @@ La acción de tutela es un mecanismo constitucional en Colombia que permite a cu
 
 1. Abra su navegador web preferido
 2. Navegue a la URL de la aplicación (proporcionada por su administrador)
-3. La aplicación se cargará automáticamente
+3. Explore las secciones informativas o haga clic en "Comenzar" para ir al formulario
 
-## Guía Paso a Paso
+## Guía Paso a Paso del Formulario
 
 ### Paso 1: Datos Personales
 
@@ -155,9 +200,9 @@ Revise toda la información antes de generar el documento:
 
 ### Sistema de Ayuda (Tour Guiado)
 
-La aplicación incluye un sistema de ayuda interactivo:
+La aplicación incluye un sistema de ayuda interactivo en el formulario:
 
-1. Haga clic en el botón "Ayuda" en la parte superior derecha
+1. Haga clic en el botón "Ayuda" en la parte superior derecha del formulario
 2. Se iniciará un tour guiado que explica cada sección
 3. Siga las instrucciones en pantalla
 4. Puede cerrar el tour en cualquier momento
@@ -205,6 +250,9 @@ Sí, puede regresar a cualquier paso usando el stepper o los botones de edición
 
 **¿El documento es legalmente válido?**
 El documento generado es una plantilla. Debe revisarlo y ajustarlo según sus necesidades específicas antes de presentarlo.
+
+**¿Dónde puedo aprender más sobre la tutela?**
+Visite nuestras secciones informativas en `/que-es`, `/participantes` y `/proceso` para comprender mejor el proceso.
 
 ---
 
