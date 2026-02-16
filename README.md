@@ -44,10 +44,11 @@ La acción de tutela es un mecanismo constitucional en Colombia que permite a cu
 La aplicación está organizada en las siguientes secciones:
 
 ### 🏠 Página de Inicio (`/`)
-Página principal que presenta la aplicación y sus funcionalidades principales. Desde aquí puede acceder a:
-- Secciones informativas sobre la tutela
-- Enlace directo al formulario de generación
-- Explicación general del servicio
+Página principal con diseño optimizado y responsivo:
+- Hero section con llamado a la acción claro.
+- Sección de características con ilustraciones y descripciones.
+- Acceso directo a secciones informativas y al generador.
+- Diseño equilibrado y centrado para mejor legibilidad.
 
 ### 📚 ¿Qué es una Tutela? (`/que-es`)
 Sección educativa que explica:
@@ -328,32 +329,21 @@ TuteladoraActionForm/
 ├── public/                # Archivos estáticos públicos
 ├── src/
 │   ├── assets/           # Recursos estáticos
-│   │   └── images/       # Imágenes (logo, etc.)
+│   │   └── images/       # Imágenes (logo, default placeholders, etc.)
 │   ├── components/       # Componentes React
 │   │   ├── ui/          # Componentes UI reutilizables (shadcn/ui)
+│   │   ├── Navbar.tsx   # Barra de navegación reutilizable y responsiva
 │   │   ├── accionado-form.tsx
 │   │   ├── anexos-form.tsx
-│   │   ├── communication-form.tsx
-│   │   ├── derechos-form.tsx
-│   │   ├── hechos-form.tsx
-│   │   ├── personal-data-form.tsx
-│   │   ├── peticiones-form.tsx
-│   │   ├── preview.tsx
-│   │   └── stepper.tsx
-│   ├── data/            # Datos estáticos
-│   │   └── derechos.ts  # Lista de derechos fundamentales
-│   ├── services/        # Servicios y lógica de negocio
-│   │   ├── api.ts       # Servicio de API
-│   │   └── tourService.ts # Servicio de tours guiados
-│   ├── styles/          # Estilos globales
-│   │   └── globals.css  # Variables CSS y estilos base
-│   ├── types/           # Definiciones de TypeScript
-│   │   └── tutela.ts    # Interfaces y tipos
-│   ├── utils/           # Utilidades
-│   │   └── pdf-generator.ts # Generador de PDF
-│   ├── App.tsx          # Componente principal
+│   │   └── ...
+│   ├── pages/            # Páginas de la aplicación
+│   │   ├── Home.tsx      # Landing page optimizada
+│   │   ├── QueEsTutela.tsx
+│   │   ├── Participantes.tsx
+│   │   └── ProcesoTutela.tsx
+│   ├── App.tsx          # Router y configuración principal
 │   ├── main.tsx         # Punto de entrada
-│   └── index.css        # Estilos principales
+│   └── index.css        # Estilos principales y variables CSS
 ├── .gitignore
 ├── package.json
 ├── package-lock.json
