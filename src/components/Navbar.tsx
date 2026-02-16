@@ -16,17 +16,20 @@ export function Navbar({ actions, className, ...props }: NavbarProps) {
         <>
             <header className={`bg-primary text-primary-foreground py-3 md:py-4 px-6 ${className || ''}`} {...props}>
                 <div className="container mx-auto px-2 md:px-4">
-                    <div className="flex items-center justify-between">
-                        <Link to="/" className="flex items-center gap-2 md:gap-3">
-                            <img src={logoImage} alt="Logo" className="w-10 md:w-16 h-auto" style={{ maxWidth: '64px' }} />
-                            <div>
-                                <h1 className="text-sm md:text-xl font-bold leading-tight tracking-tight">Tuteladora del pueblo</h1>
-                                <p className="hidden md:block text-[9px] md:text-xs opacity-90 leading-tight tracking-tight">Generador de Acciones de Tutela</p>
-                            </div>
-                        </Link>
+                    <div className="flex items-center justify-between w-full">
+                        {/* Branding - Column 1 */}
+                        <div className="flex items-center md:flex-1">
+                            <Link to="/" className="flex items-center gap-2 md:gap-8">
+                                <img src={logoImage} alt="Logo" className="w-10 md:w-16 h-auto" style={{ maxWidth: '64px' }} />
+                                <div>
+                                    <h1 className="text-sm md:text-xl font-bold leading-tight tracking-tight">Tuteladora del pueblo</h1>
+                                    <p className="hidden md:block text-[9px] md:text-xs opacity-90 leading-tight tracking-tight">Generador de Acciones de Tutela</p>
+                                </div>
+                            </Link>
+                        </div>
 
-                        {/* Desktop Navigation */}
-                        <nav className="desktop-nav items-center gap-8">
+                        {/* Desktop Navigation - Column 2 */}
+                        <nav className="desktop-nav items-center gap-8 md:flex-1 justify-center">
                             <NavLink
                                 to="/"
                                 end
@@ -70,7 +73,8 @@ export function Navbar({ actions, className, ...props }: NavbarProps) {
                             </NavLink>
                         </nav>
 
-                        <div className="flex items-center gap-4">
+                        {/* Actions/Toggle - Column 3 */}
+                        <div className="flex items-center justify-end gap-4 md:flex-1">
                             {actions && <div className="hidden md:flex items-center gap-2">{actions}</div>}
 
                             {/* Mobile Menu Toggle */}
