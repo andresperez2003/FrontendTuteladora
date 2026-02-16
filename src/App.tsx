@@ -14,7 +14,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './com
 import { Badge } from './components/ui/badge';
 import { Button } from './components/ui/button';
 import { Scale, HelpCircle } from 'lucide-react';
-import logoImage from './assets/images/Logo.png';
+import { Navbar } from './components/Navbar';
 
 import { tourService } from './services/tourService';
 
@@ -222,27 +222,21 @@ export default function App() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="bg-primary text-primary-foreground py-2 px-6" data-tour="header">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between ">
-            <div className="flex items-center gap-3">
-              <img src={logoImage} alt="Logo" width={60} height={50} />
-              <div>
-                <h1 className="text-xl">Tuteladora del pueblo</h1>
-                <p className="text-xs opacity-90">Generador de Acciones de Tutela</p>
-              </div>
-            </div>
-            <Button
-              size="sm"
-              onClick={startTour}
-              data-tour="tour-button"
-            >
-              <HelpCircle className="w-4 h-4 mr-2" />
-              <span>Ayuda</span>
-            </Button>
-          </div>
-        </div>
-      </div>
+      <Navbar
+        data-tour="header"
+        actions={
+          <Button
+            size="sm"
+            onClick={startTour}
+            data-tour="tour-button"
+            variant="secondary" // Cambiado a secondary para que se vea bien en el navbar azul si es transparente, o dejar default si navbar tiene fondo
+            className="bg-white/10 hover:bg-white/20 text-white border-0" // Ajustes para que se vea bien sobre el azul del navbar
+          >
+            <HelpCircle className="w-4 h-4 mr-2" />
+            <span>Ayuda</span>
+          </Button>
+        }
+      />
 
       {/* Content */}
       <div className="container mx-auto px-4 py-8">

@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
-import { ArrowLeft, Clock, FileCheck, Scale, Mail, AlertCircle, CheckCircle, XCircle, RefreshCw } from 'lucide-react';
-import logoImage from '../assets/images/Logo.png';
+import { Clock, FileCheck, Scale, Mail, AlertCircle, CheckCircle, XCircle, RefreshCw } from 'lucide-react';
+import { Navbar } from '../components/Navbar';
 
 export function ProcesoTutela() {
   const timelineSteps = [
@@ -94,30 +94,10 @@ export function ProcesoTutela() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-primary text-primary-foreground py-2 px-6">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between">
-            <Link to="/" className="flex items-center gap-3">
-              <img src={logoImage} alt="Logo" width={60} height={50} />
-              <div>
-                <h1 className="text-xl">Tuteladora del pueblo</h1>
-                <p className="text-xs opacity-90">Generador de Acciones de Tutela</p>
-              </div>
-            </Link>
-            <Link to="/tutela">
-              <Button variant="secondary" size="sm">Generar Tutela</Button>
-            </Link>
-          </div>
-        </div>
-      </header>
+      <Navbar />
 
       {/* Contenido */}
       <div className="container mx-auto px-4 py-12 max-w-4xl">
-        {/* Botón volver */}
-        <Link to="/" className="inline-flex items-center text-gray-600 hover:text-primary mb-8">
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          Volver al inicio
-        </Link>
 
         {/* Título */}
         <div className="mb-12">
@@ -137,7 +117,7 @@ export function ProcesoTutela() {
               {index < timelineSteps.length - 1 && (
                 <div className="absolute left-12 top-20 bottom-0 w-0.5 bg-primary/20 hidden md:block" />
               )}
-              
+
               <div className="flex flex-col md:flex-row gap-6">
                 {/* Icono y duración */}
                 <div className="flex-shrink-0 md:w-48">
@@ -155,7 +135,7 @@ export function ProcesoTutela() {
                 <div className="flex-grow">
                   <h2 className="text-2xl font-semibold mb-2">{step.titulo}</h2>
                   <p className="text-gray-600 mb-4 text-lg">{step.descripcion}</p>
-                  
+
                   <ul className="space-y-2">
                     {step.detalles.map((detalle, i) => (
                       <li key={i} className="flex items-start gap-2">

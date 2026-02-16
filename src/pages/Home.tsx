@@ -1,43 +1,13 @@
 import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
-import logoImage from '../assets/images/Logo.png';
+import { Navbar } from '../components/Navbar';
 
 export function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
       {/* Header */}
-      <header className="bg-primary text-primary-foreground py-2 px-6">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <img src={logoImage} alt="Logo" width={60} height={50} />
-              <div>
-                <h1 className="text-xl">Tuteladora del pueblo</h1>
-                <p className="text-xs opacity-90">Generador de Acciones de Tutela</p>
-              </div>
-            </div>
-            <nav className="hidden md:flex items-center gap-6">
-              <Link to="/que-es" className="text-sm hover:underline">¿Qué es?</Link>
-              <Link to="/participantes" className="text-sm hover:underline">Participantes</Link>
-              <Link to="/proceso" className="text-sm hover:underline">Proceso</Link>
-              <Link to="/tutela">
-                <Button variant="secondary" size="sm">Comenzar</Button>
-              </Link>
-            </nav>
-          </div>
-        </div>
-      </header>
-
-      {/* Mobile Navigation - visible en móviles */}
-      <div className="md:hidden bg-white border-b py-2 px-4">
-        <div className="container mx-auto flex justify-center gap-4">
-          <Link to="/que-es" className="text-sm text-gray-600">¿Qué es?</Link>
-          <Link to="/participantes" className="text-sm text-gray-600">Participantes</Link>
-          <Link to="/proceso" className="text-sm text-gray-600">Proceso</Link>
-          <Link to="/tutela" className="text-sm font-semibold text-primary">Comenzar</Link>
-        </div>
-      </div>
+      <Navbar />
 
       {/* Hero Section */}
       <div className="container mx-auto px-4 py-16">
@@ -46,7 +16,7 @@ export function Home() {
             Protege tus derechos fundamentales
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-            Genera tu acción de tutela de manera sencilla, rápida y guiada. 
+            Genera tu acción de tutela de manera sencilla, rápida y guiada.
             Un mecanismo constitucional para proteger tus derechos en Colombia.
           </p>
           <Link to="/tutela">

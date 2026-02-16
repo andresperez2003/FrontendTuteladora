@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
-import { ArrowLeft, User, Building2, Scale, FileText, Users, Gavel } from 'lucide-react';
-import logoImage from '../assets/images/Logo.png';
+import { User, Building2, Scale, FileText, Users, Gavel } from 'lucide-react';
+import { Navbar } from '../components/Navbar';
 
 export function Participantes() {
   const participantes = [
@@ -65,30 +65,10 @@ export function Participantes() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-primary text-primary-foreground py-2 px-6">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between">
-            <Link to="/" className="flex items-center gap-3">
-              <img src={logoImage} alt="Logo" width={60} height={50} />
-              <div>
-                <h1 className="text-xl">Tuteladora del pueblo</h1>
-                <p className="text-xs opacity-90">Generador de Acciones de Tutela</p>
-              </div>
-            </Link>
-            <Link to="/tutela">
-              <Button variant="secondary" size="sm">Generar Tutela</Button>
-            </Link>
-          </div>
-        </div>
-      </header>
+      <Navbar />
 
       {/* Contenido */}
       <div className="container mx-auto px-4 py-12 max-w-4xl">
-        {/* Botón volver */}
-        <Link to="/" className="inline-flex items-center text-gray-600 hover:text-primary mb-8">
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          Volver al inicio
-        </Link>
 
         {/* Título */}
         <div className="mb-12">
@@ -115,7 +95,7 @@ export function Participantes() {
                 {/* Contenido */}
                 <div className="flex-grow">
                   <h2 className="text-2xl font-semibold mb-3">{p.titulo}</h2>
-                  
+
                   <p className="text-gray-700 mb-4 leading-relaxed">
                     {p.definicion}
                   </p>
@@ -154,8 +134,8 @@ export function Participantes() {
             <div>
               <h3 className="font-semibold text-lg mb-2">Importante</h3>
               <p className="text-gray-700">
-                La Corte Constitucional puede seleccionar tutelas para revisión. Esto significa que 
-                si tu caso es seleccionado, la Corte emitirá una sentencia que unifica jurisprudencia 
+                La Corte Constitucional puede seleccionar tutelas para revisión. Esto significa que
+                si tu caso es seleccionado, la Corte emitirá una sentencia que unifica jurisprudencia
                 y puede sentar precedente para casos similares en todo el país.
               </p>
             </div>

@@ -1,37 +1,17 @@
 import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
-import { ArrowLeft, Scale, Shield, Heart, BookOpen } from 'lucide-react';
-import logoImage from '../assets/images/Logo.png';
+import { Scale, Shield, Heart, BookOpen } from 'lucide-react';
+import { Navbar } from '../components/Navbar';
 
 export function QueEsTutela() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-primary text-primary-foreground py-2 px-6">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between">
-            <Link to="/" className="flex items-center gap-3">
-              <img src={logoImage} alt="Logo" width={60} height={50} />
-              <div>
-                <h1 className="text-xl">Tuteladora del pueblo</h1>
-                <p className="text-xs opacity-90">Generador de Acciones de Tutela</p>
-              </div>
-            </Link>
-            <Link to="/tutela">
-              <Button variant="secondary" size="sm">Generar Tutela</Button>
-            </Link>
-          </div>
-        </div>
-      </header>
+      <Navbar />
 
       {/* Contenido */}
       <div className="container mx-auto px-4 py-12 max-w-4xl">
-        {/* Botón volver */}
-        <Link to="/" className="inline-flex items-center text-gray-600 hover:text-primary mb-8">
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          Volver al inicio
-        </Link>
 
         <h1 className="text-4xl font-bold text-gray-900 mb-8">
           ¿Qué es una tutela y para qué sirve?
@@ -45,13 +25,13 @@ export function QueEsTutela() {
               Definición
             </h2>
             <p className="text-gray-700 leading-relaxed mb-4">
-              La acción de tutela es un mecanismo jurídico establecido en el <strong>Artículo 86 de la 
-              Constitución Política de Colombia de 1991</strong>. Permite a cualquier persona solicitar 
-              la protección inmediata de sus derechos fundamentales cuando estos son vulnerados 
+              La acción de tutela es un mecanismo jurídico establecido en el <strong>Artículo 86 de la
+                Constitución Política de Colombia de 1991</strong>. Permite a cualquier persona solicitar
+              la protección inmediata de sus derechos fundamentales cuando estos son vulnerados
               o amenazados por acción u omisión de cualquier autoridad pública o particular.
             </p>
             <p className="text-gray-700 leading-relaxed">
-              Es un instrumento ágil y preferente que busca garantizar la protección efectiva 
+              Es un instrumento ágil y preferente que busca garantizar la protección efectiva
               de los derechos constitucionales fundamentales.
             </p>
           </Card>
@@ -65,7 +45,7 @@ export function QueEsTutela() {
                 Inmediata
               </h3>
               <p className="text-gray-600">
-                El juez tiene un término máximo de <strong>10 días</strong> para resolver, garantizando una 
+                El juez tiene un término máximo de <strong>10 días</strong> para resolver, garantizando una
                 respuesta rápida.
               </p>
             </Card>
@@ -75,7 +55,7 @@ export function QueEsTutela() {
                 Informal
               </h3>
               <p className="text-gray-600">
-                No requiere abogado ni formalidades especiales para su presentación. Puede hacerse 
+                No requiere abogado ni formalidades especiales para su presentación. Puede hacerse
                 incluso de manera verbal.
               </p>
             </Card>
@@ -85,7 +65,7 @@ export function QueEsTutela() {
                 Subsidiaria
               </h3>
               <p className="text-gray-600">
-                Procede cuando no existe otro medio de defensa judicial, o se usa como 
+                Procede cuando no existe otro medio de defensa judicial, o se usa como
                 mecanismo transitorio para evitar un perjuicio irremediable.
               </p>
             </Card>
