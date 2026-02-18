@@ -3,6 +3,7 @@ import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { Clock, FileCheck, Scale, Mail, AlertCircle, CheckCircle, XCircle, RefreshCw } from 'lucide-react';
 import { Navbar } from '../components/Navbar';
+import { Footer } from '../components/Footer';
 
 export function ProcesoTutela() {
   const timelineSteps = [
@@ -245,6 +246,7 @@ export function ProcesoTutela() {
           </p>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

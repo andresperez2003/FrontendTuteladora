@@ -3,115 +3,119 @@ import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { Scale, Shield, Heart, BookOpen } from 'lucide-react';
 import { Navbar } from '../components/Navbar';
+import { Footer } from '../components/Footer';
+import '../styles/pages/QueEsTutela.css';
 
 export function QueEsTutela() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="quetutela-wrapper">
       {/* Header */}
       <Navbar />
 
       {/* Contenido */}
-      <div className="container mx-auto px-4 py-12 pt-8 max-w-4xl">
+      <div className="container mx-auto px-4 quetutela-container max-w-4xl">
 
-        <h1 className="text-4xl font-bold text-gray-900 mb-8">
+        <h1 className="quetutela-title">
           ¿Qué es una tutela y para qué sirve?
         </h1>
 
-        <div className="space-y-8">
+        <div className="space-y-6">
           {/* Sección principal */}
-          <Card className="p-8">
-            <h2 className="text-2xl font-semibold mb-4 flex items-center">
-              <Scale className="w-6 h-6 mr-2 text-primary" />
-              Definición
-            </h2>
-            <p className="text-gray-700 leading-relaxed mb-4">
+          <div className="quetutela-card">
+            <div className="quetutela-section-header">
+              <Scale className="w-6 h-6 text-primary" />
+              <h2 className="quetutela-section-title">Definición</h2>
+            </div>
+            <p className="quetutela-text quetutela-main-text mb-4">
               La acción de tutela es un mecanismo jurídico establecido en el <strong>Artículo 86 de la
                 Constitución Política de Colombia de 1991</strong>. Permite a cualquier persona solicitar
               la protección inmediata de sus derechos fundamentales cuando estos son vulnerados
               o amenazados por acción u omisión de cualquier autoridad pública o particular.
             </p>
-            <p className="text-gray-700 leading-relaxed">
+            <p className="quetutela-text quetutela-main-text">
               Es un instrumento ágil y preferente que busca garantizar la protección efectiva
               de los derechos constitucionales fundamentales.
             </p>
-          </Card>
+          </div>
 
           {/* Características */}
-          <h2 className="text-2xl font-semibold mb-4">Características principales</h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            <Card className="p-6">
-              <h3 className="text-lg font-semibold mb-2 flex items-center">
-                <Shield className="w-5 h-5 mr-2 text-primary" />
-                Inmediata
-              </h3>
-              <p className="text-gray-600">
+          <h2 className="quetutela-section-title quetutela-section-spacing mb-6">Características principales</h2>
+          <div className="quetutela-grid">
+            <div className="quetutela-feature-card">
+              <div className="quetutela-feature-header">
+                <Shield className="w-5 h-5 text-primary" />
+                <h3 className="quetutela-feature-title">Inmediata</h3>
+              </div>
+              <p className="quetutela-feature-desc">
                 El juez tiene un término máximo de <strong>10 días</strong> para resolver, garantizando una
                 respuesta rápida.
               </p>
-            </Card>
-            <Card className="p-6">
-              <h3 className="text-lg font-semibold mb-2 flex items-center">
-                <Heart className="w-5 h-5 mr-2 text-primary" />
-                Informal
-              </h3>
-              <p className="text-gray-600">
+            </div>
+            <div className="quetutela-feature-card">
+              <div className="quetutela-feature-header">
+                <Heart className="w-5 h-5 text-primary" />
+                <h3 className="quetutela-feature-title">Informal</h3>
+              </div>
+              <p className="quetutela-feature-desc">
                 No requiere abogado ni formalidades especiales para su presentación. Puede hacerse
                 incluso de manera verbal.
               </p>
-            </Card>
-            <Card className="p-6">
-              <h3 className="text-lg font-semibold mb-2 flex items-center">
-                <BookOpen className="w-5 h-5 mr-2 text-primary" />
-                Subsidiaria
-              </h3>
-              <p className="text-gray-600">
+            </div>
+            <div className="quetutela-feature-card">
+              <div className="quetutela-feature-header">
+                <BookOpen className="w-5 h-5 text-primary" />
+                <h3 className="quetutela-feature-title">Subsidiaria</h3>
+              </div>
+              <p className="quetutela-feature-desc">
                 Procede cuando no existe otro medio de defensa judicial, o se usa como
                 mecanismo transitorio para evitar un perjuicio irremediable.
               </p>
-            </Card>
-            <Card className="p-6">
-              <h3 className="text-lg font-semibold mb-2 flex items-center">
-                <Scale className="w-5 h-5 mr-2 text-primary" />
-                Preferente
-              </h3>
-              <p className="text-gray-600">
+            </div>
+            <div className="quetutela-feature-card">
+              <div className="quetutela-feature-header">
+                <Scale className="w-5 h-5 text-primary" />
+                <h3 className="quetutela-feature-title">Preferente</h3>
+              </div>
+              <p className="quetutela-feature-desc">
                 Los jueces deben dar prioridad a su trámite sobre otros asuntos.
               </p>
-            </Card>
+            </div>
           </div>
 
           {/* Para qué sirve */}
-          <Card className="p-8 bg-primary/5 border-primary/20">
-            <h2 className="text-2xl font-semibold mb-4">¿Para qué sirve?</h2>
-            <p className="text-gray-700 leading-relaxed mb-4">
+          <div className="quetutela-highlight-section">
+            <h2 className="quetutela-highlight-title">¿Para qué sirve?</h2>
+            <p className="quetutela-text mb-6">
               La tutela sirve para proteger derechos fundamentales como:
             </p>
-            <div className="grid md:grid-cols-2 gap-3">
-              <ul className="list-disc pl-6 space-y-2">
+            <div className="quetutela-lists-container">
+              <ul className="quetutela-list">
                 <li>Derecho a la vida</li>
                 <li>Derecho a la salud</li>
                 <li>Derecho a la educación</li>
                 <li>Derecho al debido proceso</li>
               </ul>
-              <ul className="list-disc pl-6 space-y-2">
+              <ul className="quetutela-list">
                 <li>Derecho de petición</li>
                 <li>Derecho a la igualdad</li>
                 <li>Derecho a la intimidad</li>
                 <li>Libre desarrollo de la personalidad</li>
               </ul>
             </div>
-          </Card>
+          </div>
 
           {/* CTA */}
-          <div className="text-center mt-12">
+          <div className="quetutela-cta-container">
             <Link to="/tutela">
-              <Button size="lg" className="bg-primary hover:bg-primary/90">
+              <Button className="bg-primary hover:bg-primary/90 quetutela-cta-button shadow-xl">
                 Comenzar mi tutela ahora
               </Button>
             </Link>
           </div>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 }

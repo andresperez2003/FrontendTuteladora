@@ -1,0 +1,249 @@
+/* QueEsTutela Page Styles */
+
+.quetutela-wrapper {
+    min-height: 100vh;
+    background-color: #f8fafc;
+    /* Slate 50 */
+    display: flex;
+    flex-direction: column;
+}
+
+.quetutela-container {
+    padding-top: 32px;
+    padding-bottom: 64px;
+}
+
+.quetutela-title {
+    font-size: 1.75rem;
+    /* Reduced for mobile */
+    font-weight: 800;
+    color: #111827;
+    margin-bottom: 24px;
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+    .quetutela-title {
+        font-size: 2.75rem;
+        /* Slightly reduced desktop size for balance */
+        margin-bottom: 40px;
+    }
+}
+
+.quetutela-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 1.5rem;
+    padding: 32px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.quetutela-section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.quetutela-section-title {
+    font-size: 1.25rem;
+    /* Reduced for mobile */
+    font-weight: 700;
+    color: #1e293b;
+}
+
+@media (min-width: 768px) {
+    .quetutela-section-title {
+        font-size: 1.5rem;
+    }
+}
+
+.quetutela-section-spacing {
+    margin-top: 32px;
+}
+
+@media (min-width: 768px) {
+    .quetutela-section-spacing {
+        margin-top: 40px;
+    }
+}
+
+.quetutela-text {
+    font-size: 1rem;
+    /* Reduced for mobile */
+    line-height: 1.6;
+    color: #475569;
+}
+
+@media (min-width: 768px) {
+    .quetutela-text {
+        font-size: 1.125rem;
+        line-height: 1.75;
+    }
+}
+
+.quetutela-main-text {
+    font-size: 0.9375rem;
+    /* Reduced from 1rem */
+}
+
+@media (min-width: 768px) {
+    .quetutela-main-text {
+        font-size: 1rem;
+        /* Reduced from 1.125rem */
+    }
+}
+
+.quetutela-text strong {
+    color: #1e3a8a;
+    /* Indigo 900 */
+    font-weight: 600;
+}
+
+.quetutela-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-top: 40px;
+}
+
+@media (min-width: 768px) {
+    .quetutela-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.quetutela-feature-card {
+    background: white;
+    padding: 24px;
+    border-radius: 1.25rem;
+    border: 1px solid #f1f5f9;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.quetutela-feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary);
+}
+
+.quetutela-feature-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.quetutela-feature-title {
+    font-size: 1.125rem;
+    /* Reduced for mobile */
+    font-weight: 600;
+    color: #0f172a;
+}
+
+@media (min-width: 768px) {
+    .quetutela-feature-title {
+        font-size: 1.25rem;
+    }
+}
+
+.quetutela-feature-desc {
+    font-size: 0.875rem;
+    /* Reduced for mobile */
+    color: #64748b;
+    line-height: 1.5;
+}
+
+@media (min-width: 768px) {
+    .quetutela-feature-desc {
+        font-size: 1rem;
+    }
+}
+
+.quetutela-feature-desc strong {
+    color: #1e40af;
+}
+
+.quetutela-highlight-section {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(37, 99, 235, 0.1) 100%);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 1.5rem;
+    padding: 40px;
+    margin-top: 48px;
+}
+
+.quetutela-highlight-title {
+    font-size: 1.5rem;
+    /* Reduced for mobile */
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+    .quetutela-highlight-title {
+        font-size: 1.75rem;
+        margin-bottom: 24px;
+    }
+}
+
+.quetutela-lists-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+@media (min-width: 768px) {
+    .quetutela-lists-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.quetutela-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.quetutela-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    color: #334155;
+    font-weight: 500;
+    font-size: 0.875rem;
+    /* Reduced for mobile */
+}
+
+@media (min-width: 768px) {
+    .quetutela-list li {
+        font-size: 1rem;
+    }
+}
+
+.quetutela-list li::before {
+    content: "✓";
+    color: #2563eb;
+    font-weight: 800;
+}
+
+.quetutela-cta-container {
+    text-align: center;
+    margin-top: 64px;
+}
+
+.quetutela-cta-button {
+    padding: 16px 32px !important;
+    font-size: 1.125rem !important;
+    border-radius: 9999px !important;
+    font-weight: 600 !important;
+    box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
+}
+
+.spacer-lg {
+    height: 48px;
+}

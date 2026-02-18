@@ -15,6 +15,7 @@ import { Badge } from './components/ui/badge';
 import { Button } from './components/ui/button';
 import { Scale, HelpCircle } from 'lucide-react';
 import { Navbar } from './components/Navbar';
+import { Footer } from './components/Footer';
 
 import { tourService } from './services/tourService';
 
@@ -265,6 +266,7 @@ export default function App() {
           {renderCurrentStep()}
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

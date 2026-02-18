@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { Navbar } from '../components/Navbar';
+import { Footer } from '../components/Footer';
 import {
   Carousel,
   CarouselContent,
@@ -13,7 +14,7 @@ import {
 } from "../components/ui/carousel";
 import Autoplay from 'embla-carousel-autoplay';
 import defaultImage from '../assets/images/default.webp';
-import './Home.css';
+import '../styles/pages/Home.css';
 
 export function Home() {
   const [api, setApi] = useState<CarouselApi>();
@@ -161,6 +162,8 @@ export function Home() {
           </div>
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 }
