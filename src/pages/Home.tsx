@@ -2,82 +2,135 @@ import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { Navbar } from '../components/Navbar';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "../components/ui/carousel";
 import defaultImage from '../assets/images/default.webp';
+import './Home.css';
 
 export function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+    <div className="home-wrapper">
       {/* Header */}
       <Navbar />
 
       {/* Hero Section */}
-      <div className="container mx-auto px-4 md:px-4 py-12 md:py-16 pt-6 md:pt-8">
-        <div className="text-center mb-12 md:mb-16">
-          <h1 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4 md:mb-6 px-2">
+      <section className="hero-section">
+        <div className="container mx-auto px-4">
+          <h1 className="hero-title">
             Protege tus derechos fundamentales
           </h1>
-          <p className="text-base md:text-xl text-gray-600 max-w-3xl mx-auto mb-6 md:mb-8 px-2">
+          <p className="hero-description">
             Genera tu acción de tutela de manera sencilla, rápida y guiada.
             Un mecanismo constitucional para proteger tus derechos en Colombia.
           </p>
           <Link to="/tutela">
-            <Button size="lg" className="bg-primary hover:bg-primary/90 text-white px-6 md:px-8 py-5 md:py-6 text-base md:text-lg">
+            <Button size="lg" className="bg-primary hover:bg-primary/90 text-white hero-button shadow-xl">
               Comenzar mi tutela ahora
             </Button>
           </Link>
-          <p className="text-xs md:text-sm text-gray-500 mt-3 md:mt-4 px-2">
+          <p className="hero-caption">
             Sin registro, sin complicaciones. Completamente gratuito.
           </p>
         </div>
+      </section>
 
-        <div className="grid md:grid-cols-3 gap-6 md:gap-8 mb-12 md:mb-16 max-w-4xl mx-auto">
-          <Card className="p-5 md:p-6 text-center hover:shadow-lg transition-shadow bg-white items-center flex flex-col">
-            <img src={defaultImage} alt="Paso a Paso" className="h-32 md:h-24 w-auto object-contain rounded-lg mb-4" />
-            <h3 className="text-lg md:text-xl font-semibold mb-2">Paso a Paso</h3>
-            <p className="text-sm md:text-base text-gray-600">
-              Formulario guiado en 8 simples pasos para recopilar toda la información necesaria
-            </p>
-          </Card>
+      {/* Spacing */}
+      <div className="spacer-sm" />
 
-          <Card className="p-5 md:p-6 text-center hover:shadow-lg transition-shadow bg-white items-center flex flex-col">
-            <img src={defaultImage} alt="Derechos Fundamentales" className="h-32 md:h-24 w-auto object-contain rounded-lg mb-4" />
-            <h3 className="text-lg md:text-xl font-semibold mb-2">Derechos Fundamentales</h3>
-            <p className="text-sm md:text-base text-gray-600">
-              Selecciona los derechos vulnerados de una lista completa con artículos constitucionales
-            </p>
-          </Card>
+      {/* Carousel Section */}
+      <section className="carousel-section">
+        <div className="container mx-auto px-4">
+          <div className="max-w-5xl mx-auto">
+            <Carousel
+              opts={{
+                align: "center",
+                loop: true,
+              }}
+              className="carousel-container-custom"
+            >
+              <CarouselContent className="-ml-4 carousel-content-custom">
+                <CarouselItem className="pl-4 basis-full carousel-item-custom" style={{ flexBasis: '100%' }}>
+                  <div className="carousel-card-wrapper">
+                    <Card variant="carousel" className="hover:shadow-lg transition-all bg-white carousel-card-custom border-gray-200">
+                      <img src={defaultImage} alt="Paso a Paso" className="carousel-card-img" />
+                      <div className="carousel-card-text">
+                        <h3 className="text-xl md:text-2xl font-bold mb-2 text-gray-900">Paso a Paso</h3>
+                        <p className="text-base md:text-lg text-gray-600 line-clamp-2">
+                          Formulario guiado en 8 simples pasos para recopilar toda la información necesaria
+                        </p>
+                      </div>
+                    </Card>
+                  </div>
+                </CarouselItem>
 
-          <Card className="p-5 md:p-6 text-center hover:shadow-lg transition-shadow bg-white items-center flex flex-col">
-            <img src={defaultImage} alt="Documento Profesional" className="h-32 md:h-24 w-auto object-contain rounded-lg mb-4" />
-            <h3 className="text-lg md:text-xl font-semibold mb-2">Documento Profesional</h3>
-            <p className="text-sm md:text-base text-gray-600">
-              Genera un documento Word listo para presentar ante las autoridades
-            </p>
-          </Card>
-        </div>
+                <CarouselItem className="pl-4 basis-full carousel-item-custom" style={{ flexBasis: '100%' }}>
+                  <div className="carousel-card-wrapper">
+                    <Card variant="carousel" className="hover:shadow-lg transition-all bg-white carousel-card-custom border-gray-200">
+                      <img src={defaultImage} alt="Derechos Fundamentales" className="carousel-card-img" />
+                      <div className="carousel-card-text">
+                        <h3 className="text-xl md:text-2xl font-bold mb-2 text-gray-900">Derechos Fundamentales</h3>
+                        <p className="text-base md:text-lg text-gray-600 line-clamp-2">
+                          Selecciona los derechos vulnerados de una lista completa con artículos constitucionales
+                        </p>
+                      </div>
+                    </Card>
+                  </div>
+                </CarouselItem>
 
-        {/* CTA Section */}
-        <div className="bg-primary/5 rounded-2xl p-6 md:p-12 text-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3 md:mb-4 px-2">
-            ¿Listo para proteger tus derechos?
-          </h2>
-          <p className="text-base md:text-lg text-gray-600 mb-6 md:mb-8 max-w-2xl mx-auto px-2">
-            En menos de 15 minutos tendrás tu acción de tutela lista para presentar
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center px-2">
-            <Link to="/que-es">
-              <Button variant="outline" size="lg">
-                Aprender más
-              </Button>
-            </Link>
-            <Link to="/tutela">
-              <Button size="lg" className="bg-primary hover:bg-primary/90">
-                Comenzar ahora
-              </Button>
-            </Link>
+                <CarouselItem className="pl-4 basis-full carousel-item-custom" style={{ flexBasis: '100%' }}>
+                  <div className="carousel-card-wrapper">
+                    <Card variant="carousel" className="hover:shadow-lg transition-all bg-white carousel-card-custom border-gray-200">
+                      <img src={defaultImage} alt="Documento Profesional" className="carousel-card-img" />
+                      <div className="carousel-card-text">
+                        <h3 className="text-xl md:text-2xl font-bold mb-2 text-gray-900">Documento Profesional</h3>
+                        <p className="text-base md:text-lg text-gray-600 line-clamp-2">
+                          Genera un documento Word listo para presentar ante las autoridades
+                        </p>
+                      </div>
+                    </Card>
+                  </div>
+                </CarouselItem>
+              </CarouselContent>
+              <CarouselPrevious className="hidden md:flex -left-16" />
+              <CarouselNext className="hidden md:flex -right-16" />
+            </Carousel>
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* Large Spacing for distinct separation */}
+      <div className="spacer-lg" />
+
+      {/* CTA Section */}
+      <section className="cta-section">
+        <div className="container mx-auto px-4">
+          <div className="cta-container-inner">
+            <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900 mb-6 md:mb-8">
+              ¿Listo para proteger tus derechos?
+            </h2>
+            <p className="text-lg md:text-2xl text-gray-600 mb-10 md:mb-14 leading-relaxed max-w-2xl mx-auto">
+              En menos de 15 minutos tendrás tu acción de tutela lista para presentar ante las autoridades.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center">
+              <Link to="/que-es">
+                <Button variant="outline" size="lg" className="border-2 px-8 rounded-full">
+                  Aprender más
+                </Button>
+              </Link>
+              <Link to="/tutela">
+                <Button size="lg" className="bg-primary hover:bg-primary/90 shadow-xl px-8 rounded-full">
+                  Comenzar ahora
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
