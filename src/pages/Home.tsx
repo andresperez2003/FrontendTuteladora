@@ -1,3 +1,4 @@
+import { useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
@@ -8,11 +9,27 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
+  type CarouselApi,
 } from "../components/ui/carousel";
+import Autoplay from 'embla-carousel-autoplay';
 import defaultImage from '../assets/images/default.webp';
 import './Home.css';
 
 export function Home() {
+  const [api, setApi] = useState<CarouselApi>();
+
+  const handlePrev = useCallback(() => {
+    if (!api) return;
+    api.scrollPrev();
+    api.plugins().autoplay?.reset();
+  }, [api]);
+
+  const handleNext = useCallback(() => {
+    if (!api) return;
+    api.scrollNext();
+    api.plugins().autoplay?.reset();
+  }, [api]);
+
   return (
     <div className="home-wrapper">
       {/* Header */}
@@ -47,10 +64,17 @@ export function Home() {
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto">
             <Carousel
+              setApi={setApi}
               opts={{
                 align: "center",
                 loop: true,
               }}
+              plugins={[
+                Autoplay({
+                  delay: 10000,
+                  stopOnInteraction: false,
+                }),
+              ]}
               className="carousel-container-custom"
             >
               <CarouselContent className="-ml-4 carousel-content-custom">
@@ -96,8 +120,14 @@ export function Home() {
                   </div>
                 </CarouselItem>
               </CarouselContent>
-              <CarouselPrevious className="hidden md:flex -left-16" />
-              <CarouselNext className="hidden md:flex -right-16" />
+              <CarouselPrevious
+                className="carousel-nav-button left-4 md:left-6"
+                onClick={handlePrev}
+              />
+              <CarouselNext
+                className="carousel-nav-button right-4 md:right-6"
+                onClick={handleNext}
+              />
             </Carousel>
           </div>
         </div>
