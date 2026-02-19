@@ -137,6 +137,35 @@ export function Home() {
       {/* Large Spacing for distinct separation */}
       <div className="spacer-lg" />
 
+      {/* Video Section */}
+      <section className="video-section">
+        <div className="container mx-auto px-4">
+          <div className="video-content-wrapper text-center">
+            <h2 className="section-title mb-4">
+              ¿Cómo funciona Tuteladora?
+            </h2>
+            <p className="section-description mb-10 max-w-2xl mx-auto">
+              Mira este corto video para entender cómo nuestra herramienta te ayuda a proteger tus derechos en pocos minutos.
+            </p>
+
+            <div className="video-container-main mx-auto">
+              <div className="video-aspect-ratio">
+                <iframe
+                  src="https://www.youtube.com/embed/5Mv5xoz08Mo"
+                  title="Tutorial Tuteladora"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="absolute inset-0 w-full h-full rounded-2xl shadow-2xl"
+                ></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Large Spacing for distinct separation */}
+      <div className="spacer-lg" />
+
       {/* CTA Section */}
       <section className="cta-section">
         <div className="container mx-auto px-4">
