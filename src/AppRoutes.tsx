@@ -4,10 +4,12 @@ import { QueEsTutela } from './pages/QueEsTutela';
 import { Participantes } from './pages/Participantes';
 import { ProcesoTutela } from './pages/ProcesoTutela';
 import App from './App';
+import ScrollToTop from './components/ScrollToTop';
 
 export function AppRoutes() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/tutela" element={<App />} />
