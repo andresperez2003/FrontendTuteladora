@@ -197,7 +197,22 @@ Revise toda la información antes de generar el documento:
 
 **Nota:** El documento se descargará automáticamente en formato .docx
 
-## Funcionalidades Principales
+### Validaciones de Formulario Estrictas
+
+- Validaciones de tipo de datos (solo letras en nombres, solo números en cédula/teléfono).
+- Límites de longitud específicos para cada campo para asegurar la calidad de la información.
+- Retroalimentación visual inmediata con mensajes de error descriptivos.
+
+### Persistencia de Datos (Auto-guardado)
+
+- Los datos se guardan automáticamente en el almacenamiento local del navegador (`localStorage`).
+- Permite refrescar la página o cerrar el navegador sin perder el progreso del formulario.
+- Restaura tanto la información ingresada como el paso actual en el que se encontraba el usuario.
+
+### Navegación Optimizada
+
+- Desplazamiento automático al inicio de la página (`Scroll to Top`) al navegar entre rutas.
+- Mejora la experiencia de usuario en aplicaciones de una sola página (SPA).
 
 ### Sistema de Ayuda (Tour Guiado)
 
@@ -210,7 +225,7 @@ La aplicación incluye un sistema de ayuda interactivo en el formulario:
 
 ### Navegación entre Pasos
 
-- **Botón "Siguiente":** Avanza al siguiente paso
+- **Botón "Siguiente":** Avanza al siguiente paso (se habilita solo si los datos son válidos)
 - **Botón "Anterior":** Regresa al paso anterior
 - **Stepper (Indicador de Pasos):** Muestra su progreso y le permite hacer clic en cualquier paso para navegar directamente
 
@@ -229,11 +244,11 @@ En el paso final, puede:
 - Asegúrese de que su navegador permita descargas
 - Revise la configuración de bloqueadores de anuncios
 
-### Los datos no se guardan
+### Los datos no se muestran correctamente
 
-- La aplicación guarda los datos mientras navega entre pasos
-- Si recarga la página, los datos se perderán
-- Complete el proceso en una sola sesión
+- Los datos se guardan automáticamente mientras navega o escribe.
+- Si recarga la página, los datos deberían restaurarse automáticamente gracias al sistema de persistencia local.
+- Si tiene problemas persistentes, intente limpiar el caché del navegador.
 
 ### Error al generar el documento
 
@@ -244,7 +259,7 @@ En el paso final, puede:
 ### Preguntas Frecuentes
 
 **¿Puedo guardar mi progreso?**
-Actualmente, la aplicación no guarda el progreso entre sesiones. Complete el formulario en una sola sesión.
+Sí, la aplicación guarda automáticamente su progreso en el almacenamiento local de su navegador. Si cierra la pestaña o recarga la página, podrá continuar donde quedó.
 
 **¿Puedo editar después de generar el documento?**
 Sí, puede regresar a cualquier paso usando el stepper o los botones de edición en la previsualización.
@@ -540,12 +555,13 @@ El backend expone los siguientes endpoints principales:
 - `POST /generar-pdf`: Genera y retorna un documento PDF (opcional)
 - `GET /ejemplo-datos`: Retorna un ejemplo de la estructura de datos esperada
 
-### Gestión de Estado
+### Gestión de Estado y Persistencia
 
-La aplicación usa **React Hooks** para la gestión de estado:
+La aplicación usa **React Hooks** y **LocalStorage** para la gestión de estado:
 
-- `useState`: Para el estado local de cada componente y el estado global en `App.tsx`
-- No se usa Redux o Context API (puede agregarse si el proyecto crece)
+- `useState`: Para el estado local de cada componente y el estado global en `App.tsx`.
+- `useEffect`: Para manejar la sincronización con `localStorage` y el posicionamiento de la página.
+- **Persistencia**: Se utiliza `localStorage` para guardar una copia serializada del estado `tutelaData` y el paso actual, garantizando la continuidad del usuario.
 
 ### Componentes Principales
 

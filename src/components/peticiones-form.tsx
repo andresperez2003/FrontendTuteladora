@@ -19,15 +19,28 @@ export function PeticionesForm({ data, onUpdate, onNext, onPrevious }: Peticione
     ...data,
     protegerDerechos: true // Siempre marcado por defecto
   });
+  const [error, setError] = useState<string>('');
+
+  const validate = (value: string) => {
+    let newError = '';
+    if (value.trim() === '') {
+      newError = 'Este campo es requerido';
+    } else if (value.trim().length < 10) {
+      newError = 'Por favor sea más específico (mínimo 10 caracteres)';
+    }
+    setError(newError);
+    return newError === '';
+  };
 
   const handleAccionEspecificaChange = (value: string) => {
     const newData = { ...formData, accionEspecifica: value, protegerDerechos: true };
     setFormData(newData);
+    validate(value);
     onUpdate(newData);
   };
 
   const isFormValid = () => {
-    return formData.accionEspecifica.trim() !== '';
+    return formData.accionEspecifica.trim() !== '' && error === '';
   };
 
   return (
@@ -45,7 +58,7 @@ export function PeticionesForm({ data, onUpdate, onNext, onPrevious }: Peticione
               id="proteger-derechos"
               data-tour="proteger-derechos-checkbox"
               checked={true}
-              onCheckedChange={() => {}} // Función vacía para evitar cambios
+              onCheckedChange={() => { }} // Función vacía para evitar cambios
               className="mt-1 cursor-default"
               style={{ pointerEvents: 'none' }}
             />
@@ -69,12 +82,13 @@ export function PeticionesForm({ data, onUpdate, onNext, onPrevious }: Peticione
               value={formData.accionEspecifica}
               onChange={(e) => handleAccionEspecificaChange(e.target.value)}
               placeholder="Describa la acción específica que debe realizar el accionado para subsanar la vulneración de derechos."
-              className="min-h-[120px]"
+              className={`min-h-[120px] ${error ? 'border-destructive' : ''}`}
             />
+            {error && <p className="text-xs text-destructive">{error}</p>}
             <p className="text-xs text-muted-foreground">
               Esta petición será incluida en el documento: "Que se ordene al accionado a [su descripción]"
             </p>
-            
+
           </div>
         </div>
 
@@ -82,8 +96,8 @@ export function PeticionesForm({ data, onUpdate, onNext, onPrevious }: Peticione
           <Button onClick={onPrevious}>
             Anterior
           </Button>
-          <Button 
-            onClick={onNext} 
+          <Button
+            onClick={onNext}
             disabled={!isFormValid()}
           >
             Siguiente

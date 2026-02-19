@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { TutelaData, PersonalData, AccionadoData, Hecho, DerechoFundamental, Anexo, CommunicationData, Peticion } from './types/tutela';
 import { Stepper } from './components/stepper';
 import { PersonalDataForm } from './components/personal-data-form';
@@ -53,6 +53,8 @@ const initialPeticiones: Peticion = {
   accionEspecifica: ''
 };
 
+const STORAGE_KEY = 'tutela_form_data';
+
 export default function App() {
   const [currentStep, setCurrentStep] = useState(0);
   const [tutelaData, setTutelaData] = useState<TutelaData>({
@@ -64,6 +66,28 @@ export default function App() {
     communicationData: initialCommunicationData,
     peticiones: initialPeticiones
   });
+
+  // Load data from localStorage on mount
+  useEffect(() => {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      try {
+        const { data, step } = JSON.parse(saved);
+        if (data) setTutelaData(data);
+        if (typeof step === 'number') setCurrentStep(step);
+      } catch (e) {
+        console.error('Error loading saved tutela data:', e);
+      }
+    }
+  }, []);
+
+  // Save data to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      data: tutelaData,
+      step: currentStep
+    }));
+  }, [tutelaData, currentStep]);
 
   const updatePersonalData = (data: PersonalData) => {
     setTutelaData(prev => ({ ...prev, personalData: data }));
