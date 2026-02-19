@@ -39,12 +39,14 @@ export function Preview({ data, onPrevious, onEdit }: PreviewProps) {
 
     try {
       const response = await ApiService.generateAndDownloadWord(data);
-      
+
       if (response.success) {
         setSubmitStatus({
           type: 'success',
           message: response.message
         });
+        // Borrar datos del cache al finalizar con éxito
+        localStorage.removeItem('tutela_form_data');
       } else {
         setSubmitStatus({
           type: 'error',
@@ -239,11 +241,11 @@ export function Preview({ data, onPrevious, onEdit }: PreviewProps) {
         <Button onClick={onPrevious}>
           Anterior
         </Button>
-        
+
         <div className="flex flex-col sm:flex-row gap-2">
 
-          
-          <Button 
+
+          <Button
             onClick={handleGenerateWord}
             disabled={isSubmitting}
             data-tour="generate-word-button"

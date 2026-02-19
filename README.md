@@ -206,7 +206,8 @@ Revise toda la información antes de generar el documento:
 ### Persistencia de Datos (Auto-guardado)
 
 - Los datos se guardan automáticamente en el almacenamiento local del navegador (`localStorage`).
-- Permite refrescar la página o cerrar el navegador sin perder el progreso del formulario.
+- **Límite de Tiempo**: Los datos expiran automáticamente después de **1 hora** de inactividad para garantizar la privacidad y frescura de la información.
+- **Limpieza Automática**: Al generar con éxito la tutela, el caché se borra automáticamente para permitir un nuevo inicio limpio.
 - Restaura tanto la información ingresada como el paso actual en el que se encontraba el usuario.
 
 ### Navegación Optimizada
@@ -561,7 +562,7 @@ La aplicación usa **React Hooks** y **LocalStorage** para la gestión de estado
 
 - `useState`: Para el estado local de cada componente y el estado global en `App.tsx`.
 - `useEffect`: Para manejar la sincronización con `localStorage` y el posicionamiento de la página.
-- **Persistencia**: Se utiliza `localStorage` para guardar una copia serializada del estado `tutelaData` y el paso actual, garantizando la continuidad del usuario.
+- **Persistencia**: Se utiliza `localStorage` con un tiempo de vida (TTL) de 1 hora. Se incluye un `timestamp` en el objeto guardado para validar la expiración al cargar y se realiza una limpieza automática en el componente `Preview` tras la generación exitosa.
 
 ### Componentes Principales
 

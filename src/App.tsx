@@ -54,6 +54,7 @@ const initialPeticiones: Peticion = {
 };
 
 const STORAGE_KEY = 'tutela_form_data';
+const MAX_AGE = 60 * 60 * 1000; // 1 hora en milisegundos
 
 export default function App() {
   const [currentStep, setCurrentStep] = useState(0);
@@ -72,7 +73,16 @@ export default function App() {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
       try {
-        const { data, step } = JSON.parse(saved);
+        const { data, step, timestamp } = JSON.parse(saved);
+
+        // Verificar si los datos han expirado (1 hora)
+        const isExpired = timestamp && (Date.now() - timestamp > MAX_AGE);
+
+        if (isExpired) {
+          localStorage.removeItem(STORAGE_KEY);
+          return;
+        }
+
         if (data) setTutelaData(data);
         if (typeof step === 'number') setCurrentStep(step);
       } catch (e) {
@@ -85,7 +95,8 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify({
       data: tutelaData,
-      step: currentStep
+      step: currentStep,
+      timestamp: Date.now()
     }));
   }, [tutelaData, currentStep]);
 
