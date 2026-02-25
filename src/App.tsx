@@ -258,25 +258,25 @@ export default function App() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <Navbar
-        data-tour="header"
-        actions={
-          <Button
-            size="sm"
-            onClick={startTour}
-            data-tour="tour-button"
-            variant="secondary" // Cambiado a secondary para que se vea bien en el navbar azul si es transparente, o dejar default si navbar tiene fondo
-            className="bg-white/10 hover:bg-white/20 text-white border-0" // Ajustes para que se vea bien sobre el azul del navbar
-          >
-            <HelpCircle className="w-4 h-4 mr-2" />
-            <span>Ayuda</span>
-          </Button>
-        }
-      />
+      <Navbar data-tour="header" />
 
       {/* Content */}
       <div className="container mx-auto px-4 py-8 pt-8 max-w-4xl">
         <div className="max-w-4xl mx-auto space-y-6">
+          {/* Help Button */}
+          <div className="flex justify-end">
+            <Button
+              size="sm"
+              onClick={startTour}
+              data-tour="tour-button"
+              variant="outline"
+              className="gap-2"
+            >
+              <HelpCircle className="w-4 h-4" />
+              <span>¿Necesitas ayuda?</span>
+            </Button>
+          </div>
+
           {/* Progress */}
           <Card data-tour="progress-card">
             <CardHeader>
