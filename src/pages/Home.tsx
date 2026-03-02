@@ -43,8 +43,7 @@ export function Home() {
             Protege tus derechos fundamentales
           </h1>
           <p className="hero-description">
-            Genera tu acción de tutela de manera sencilla, rápida y guiada.
-            Un mecanismo constitucional para proteger tus derechos en Colombia.
+            Un mecanismo constitucional para proteger tus derechos fundamentales en Colombia.
           </p>
           <Link to="/tutela">
             <Button size="lg" className="bg-primary hover:bg-primary/90 text-white hero-button shadow-xl">
@@ -174,7 +173,10 @@ export function Home() {
               ¿Listo para proteger tus derechos?
             </h2>
             <p className="text-lg md:text-2xl text-gray-600 mb-10 md:mb-14 leading-relaxed max-w-2xl mx-auto">
-              En menos de 15 minutos tendrás tu acción de tutela lista para presentar ante las autoridades.
+              En pocos minutos podrás generar un borrador de tu acción de tutela listo para revisión y presentación.
+            </p>
+            <p className="text-sm md:text-base text-gray-500 mb-10 md:mb-14 italic max-w-2xl mx-auto">
+              La plataforma genera un documento orientador y no reemplaza la asesoría jurídica profesional.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center">
               <Link to="/que-es">
@@ -190,9 +192,9 @@ export function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </section >
 
       <Footer />
-    </div>
+    </div >
   );
 }

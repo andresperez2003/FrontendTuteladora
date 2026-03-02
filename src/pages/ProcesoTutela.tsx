@@ -14,7 +14,7 @@ export function ProcesoTutela() {
       detalles: [
         "Escrito o verbal",
         "Sin abogado ni formalidades",
-        "Cualquier día y hora",
+        "Puede presentarse en cualquier momento, incluso por medios electrónicos habilitados.",
         "Sin costo alguno"
       ],
       duracion: "Inmediato",
@@ -26,11 +26,11 @@ export function ProcesoTutela() {
       descripcion: "El juez admite la tutela y pide informe al accionado.",
       detalles: [
         "Verificación de requisitos",
-        "Traslado por 1 a 3 días",
+        "El juez podrá solicitar informe al accionado dentro del término que señale.",
         "Informe del accionado",
         "Solicitud de pruebas"
       ],
-      duracion: "1-3 días",
+      duracion: "Sujeto al término del juez",
       colorClass: "green"
     },
     {
@@ -53,10 +53,10 @@ export function ProcesoTutela() {
       detalles: [
         "3 días para presentarla",
         "Resuelve superior jerárquico",
-        "Máximo 20 días en 2da instancia",
+        "El superior jerárquico deberá decidir dentro de los veinte (20) días siguientes a la recepción del expediente.",
         "No suspende el cumplimiento"
       ],
-      duracion: "3 días / 20 días",
+      duracion: "3 días presentación / 20 días resolución",
       colorClass: "orange"
     },
     {
@@ -167,7 +167,7 @@ export function ProcesoTutela() {
               <ul className="proceso-action-list">
                 <li><AlertCircle className="w-3 h-3 text-red-600 mt-1" /> Puede impugnar en 3 días</li>
                 <li><AlertCircle className="w-3 h-3 text-red-600 mt-1" /> Acudir a otros mecanismos</li>
-                <li><AlertCircle className="w-3 h-3 text-red-600 mt-1" /> Nueva tutela si hay nuevos hechos</li>
+                <li><AlertCircle className="w-3 h-3 text-red-600 mt-1" /> Podrá presentarse una nueva tutela únicamente cuando existan hechos nuevos o una vulneración distinta.</li>
               </ul>
             </div>
           </div>
@@ -180,7 +180,7 @@ export function ProcesoTutela() {
               <Clock className="w-4 h-4" /> Tiempos clave
             </h3>
             <ul className="proceso-info-list">
-              <li>• Admisión: 1-3 días tras presentación</li>
+              <li>• Admisión y traslado: El juez fija el término para el informe</li>
               <li>• Decisión: 10 días hábiles obligatorios</li>
               <li>• Impugnación: Solo 3 días tras notificación</li>
             </ul>

@@ -30,7 +30,7 @@ export function QueEsTutela() {
               La acción de tutela es un mecanismo jurídico establecido en el <strong>Artículo 86 de la
                 Constitución Política de Colombia de 1991</strong>. Permite a cualquier persona solicitar
               la protección inmediata de sus derechos fundamentales cuando estos son vulnerados
-              o amenazados por acción u omisión de cualquier autoridad pública o particular.
+              o amenazados por acción u omisión de autoridades públicas o, en los casos previstos por la ley, de particulares.
             </p>
             <p className="quetutela-text quetutela-main-text">
               Es un instrumento ágil y preferente que busca garantizar la protección efectiva
@@ -47,7 +47,7 @@ export function QueEsTutela() {
                 <h3 className="quetutela-feature-title">Inmediata</h3>
               </div>
               <p className="quetutela-feature-desc">
-                El juez tiene un término máximo de <strong>10 días</strong> para resolver, garantizando una
+                El juez tiene un término máximo de <strong>diez (10) días calendario</strong> para resolver, garantizando una
                 respuesta rápida.
               </p>
             </div>
@@ -67,7 +67,7 @@ export function QueEsTutela() {
                 <h3 className="quetutela-feature-title">Subsidiaria</h3>
               </div>
               <p className="quetutela-feature-desc">
-                Procede cuando no existe otro medio de defensa judicial, o se usa como
+                Procede cuando no exista otro medio de defensa judicial idóneo y eficaz, o se usa como
                 mecanismo transitorio para evitar un perjuicio irremediable.
               </p>
             </div>

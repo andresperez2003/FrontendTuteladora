@@ -18,7 +18,7 @@ export function Participantes() {
         "Aporta las pruebas de la vulneración",
         "Formula las peticiones al juez"
       ],
-      puedeSer: "Cualquier persona natural o jurídica, sin importar su edad, nacionalidad o condición. Incluso puede presentarse a nombre de otro (agencia oficiosa).",
+      puedeSer: "Cualquier persona natural. Las personas jurídicas podrán interponer acción de tutela cuando se trate de la protección de derechos fundamentales que les sean aplicables.",
       colorClass: "blue"
     },
     {
@@ -31,13 +31,13 @@ export function Participantes() {
         "Presenta las pruebas que respalden su posición",
         "Puede allanarse a las pretensiones (aceptar la vulneración)"
       ],
-      puedeSer: "Autoridades públicas (alcaldías, ministerios), particulares que presten servicios públicos (EPS, colegios privados), o personas naturales en contextos específicos.",
+      puedeSer: "Autoridades públicas o particulares cuando: prestan un servicio público, existe subordinación o indefensión, o su conducta afecta grave y directamente el interés colectivo.",
       colorClass: "red"
     },
     {
       icon: <Scale className="w-6 h-6" />,
       titulo: "Juez de Tutela",
-      definicion: "Es la autoridad judicial encargada de tramitar y decidir la acción de tutela. Puede ser cualquier juez de la República, sin importar su especialidad.",
+      definicion: "Es la autoridad judicial encargada de tramitar y decidir la acción de tutela. Puede ser cualquier juez de la República, de acuerdo con las reglas de competencia y reparto.",
       rol: [
         "Admite la solicitud de tutela",
         "Notifica al accionado para que rinda informe",
@@ -51,7 +51,7 @@ export function Participantes() {
     {
       icon: <FileText className="w-6 h-6" />,
       titulo: "Ministerio Público",
-      definicion: "Representado por el Procurador Judicial, el Personero Municipal o el Defensor del Pueblo. Vela por la protección de los derechos fundamentales y el orden jurídico.",
+      definicion: "Representado por Procuradores Judiciales, Personeros Municipales o la Defensoría del Pueblo. Vela por la protección de los derechos fundamentales y el orden jurídico.",
       rol: [
         "Interviene en el proceso para garantizar la legalidad",
         "Emite concepto sobre el caso",
