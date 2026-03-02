@@ -1,6 +1,6 @@
 # Tuteladora
 
-**Tuteladora** es una aplicación web diseñada para facilitar la generación de acciones de tutela en Colombia. La aplicación guía a los usuarios a través de un proceso paso a paso para completar todos los datos necesarios y generar un documento Word con la accion de tutela listo para presentar.
+**Tuteladora** es una aplicación web diseñada para facilitar la generación de acciones de tutela en Colombia. La aplicación ofrece contenido informativo sobre el proceso de tutela y guía a los usuarios a través de un formulario paso a paso para completar todos los datos necesarios y generar un documento Word con la acción de tutela listo para presentar.
 
 > **Backend:** Este proyecto utiliza un backend API para la generación de documentos. El código del backend está disponible en [GeneradorTuteladora](https://github.com/andresperez2003/GeneradorTuteladora).
 
@@ -10,15 +10,17 @@
 
 1. [Manual de Usuario](#manual-de-usuario)
    - [Introducción](#introducción)
+   - [Estructura del Sitio](#estructura-del-sitio)
    - [Requisitos del Sistema](#requisitos-del-sistema)
    - [Acceso a la Aplicación](#acceso-a-la-aplicación)
-   - [Guía Paso a Paso](#guía-paso-a-paso)
+   - [Guía Paso a Paso del Formulario](#guía-paso-a-paso-del-formulario)
    - [Funcionalidades Principales](#funcionalidades-principales)
    - [Solución de Problemas](#solución-de-problemas)
 2. [Manual de Desarrollador](#manual-de-desarrollador)
    - [Requisitos Técnicos](#requisitos-técnicos)
    - [Instalación](#instalación)
    - [Estructura del Proyecto](#estructura-del-proyecto)
+   - [Rutas y Navegación](#rutas-y-navegación)
    - [Configuración](#configuración)
    - [Guía de Desarrollo](#guía-de-desarrollo)
    - [Arquitectura](#arquitectura)
@@ -31,11 +33,55 @@
 
 ## Introducción
 
-Tuteladora Action Form es una herramienta diseñada para ayudar a los ciudadanos colombianos a generar acciones de tutela de manera sencilla y estructurada. La aplicación le guiará a través de 8 pasos para recopilar toda la información necesaria y generar un documento Word profesional.
+Tuteladora es una herramienta integral diseñada para ayudar a los ciudadanos colombianos a comprender y generar acciones de tutela de manera sencilla y estructurada. La aplicación combina contenido educativo con un generador práctico que le guiará a través de 8 pasos para recopilar toda la información necesaria y producir un documento Word profesional.
 
 ### ¿Qué es una Acción de Tutela?
 
 La acción de tutela es un mecanismo constitucional en Colombia que permite a cualquier persona solicitar la protección inmediata de sus derechos fundamentales cuando estos sean vulnerados o amenazados por la acción u omisión de cualquier autoridad pública o particular.
+
+## Estructura del Sitio
+
+La aplicación está organizada en las siguientes secciones:
+
+### 🏠 Página de Inicio (`/`)
+Página principal con diseño optimizado y responsivo:
+- Hero section con llamado a la acción claro.
+- Sección de características con ilustraciones y descripciones.
+- Acceso directo a secciones informativas y al generador.
+- Diseño equilibrado y centrado para mejor legibilidad.
+
+### 📚 ¿Qué es una Tutela? (`/que-es`)
+Sección educativa que explica:
+- Definición y fundamento constitucional de la acción de tutela (Artículo 86)
+- Características principales: inmediata, informal, subsidiaria y preferente
+- Derechos fundamentales que pueden protegerse
+- Propósito y alcance del mecanismo
+
+### 👥 Participantes (`/participantes`)
+Detalla los actores que intervienen en el proceso:
+- **Accionante (Tutelante):** Quien interpone la tutela
+- **Accionado:** Entidad o persona contra quien se dirige
+- **Juez de Tutela:** Autoridad que tramita y decide
+- **Ministerio Público:** Ente que vela por la legalidad
+- Rol específico y funciones de cada participante
+
+### ⚖️ Proceso de Tutela (`/proceso`)
+Explica el paso a paso después de presentar la tutela:
+- Timeline completo del proceso judicial
+- Tiempos estimados para cada etapa
+- Posibles decisiones del juez
+- Recomendaciones y pasos a seguir
+
+### 📝 Generar Tutela (`/tutela`)
+Formulario principal de 8 pasos para crear su acción de tutela:
+1. Datos Personales
+2. Accionado
+3. Hechos
+4. Derechos
+5. Anexos
+6. Comunicación
+7. Peticiones
+8. Previsualización
 
 ## Requisitos del Sistema
 
@@ -47,9 +93,9 @@ La acción de tutela es un mecanismo constitucional en Colombia que permite a cu
 
 1. Abra su navegador web preferido
 2. Navegue a la URL de la aplicación (proporcionada por su administrador)
-3. La aplicación se cargará automáticamente
+3. Explore las secciones informativas o haga clic en "Comenzar" para ir al formulario
 
-## Guía Paso a Paso
+## Guía Paso a Paso del Formulario
 
 ### Paso 1: Datos Personales
 
@@ -151,20 +197,36 @@ Revise toda la información antes de generar el documento:
 
 **Nota:** El documento se descargará automáticamente en formato .docx
 
-## Funcionalidades Principales
+### Validaciones de Formulario Estrictas
+
+- Validaciones de tipo de datos (solo letras en nombres, solo números en cédula/teléfono).
+- Límites de longitud específicos para cada campo para asegurar la calidad de la información.
+- Retroalimentación visual inmediata con mensajes de error descriptivos.
+
+### Persistencia de Datos (Auto-guardado)
+
+- Los datos se guardan automáticamente en el almacenamiento local del navegador (`localStorage`).
+- **Límite de Tiempo**: Los datos expiran automáticamente después de **1 hora** de inactividad para garantizar la privacidad y frescura de la información.
+- **Limpieza Automática**: Al generar con éxito la tutela, el caché se borra automáticamente para permitir un nuevo inicio limpio.
+- Restaura tanto la información ingresada como el paso actual en el que se encontraba el usuario.
+
+### Navegación Optimizada
+
+- Desplazamiento automático al inicio de la página (`Scroll to Top`) al navegar entre rutas.
+- Mejora la experiencia de usuario en aplicaciones de una sola página (SPA).
 
 ### Sistema de Ayuda (Tour Guiado)
 
-La aplicación incluye un sistema de ayuda interactivo:
+La aplicación incluye un sistema de ayuda interactivo en el formulario:
 
-1. Haga clic en el botón "Ayuda" en la parte superior derecha
+1. Haga clic en el botón "Ayuda" en la parte superior derecha del formulario
 2. Se iniciará un tour guiado que explica cada sección
 3. Siga las instrucciones en pantalla
 4. Puede cerrar el tour en cualquier momento
 
 ### Navegación entre Pasos
 
-- **Botón "Siguiente":** Avanza al siguiente paso
+- **Botón "Siguiente":** Avanza al siguiente paso (se habilita solo si los datos son válidos)
 - **Botón "Anterior":** Regresa al paso anterior
 - **Stepper (Indicador de Pasos):** Muestra su progreso y le permite hacer clic en cualquier paso para navegar directamente
 
@@ -183,11 +245,11 @@ En el paso final, puede:
 - Asegúrese de que su navegador permita descargas
 - Revise la configuración de bloqueadores de anuncios
 
-### Los datos no se guardan
+### Los datos no se muestran correctamente
 
-- La aplicación guarda los datos mientras navega entre pasos
-- Si recarga la página, los datos se perderán
-- Complete el proceso en una sola sesión
+- Los datos se guardan automáticamente mientras navega o escribe.
+- Si recarga la página, los datos deberían restaurarse automáticamente gracias al sistema de persistencia local.
+- Si tiene problemas persistentes, intente limpiar el caché del navegador.
 
 ### Error al generar el documento
 
@@ -198,13 +260,16 @@ En el paso final, puede:
 ### Preguntas Frecuentes
 
 **¿Puedo guardar mi progreso?**
-Actualmente, la aplicación no guarda el progreso entre sesiones. Complete el formulario en una sola sesión.
+Sí, la aplicación guarda automáticamente su progreso en el almacenamiento local de su navegador. Si cierra la pestaña o recarga la página, podrá continuar donde quedó.
 
 **¿Puedo editar después de generar el documento?**
 Sí, puede regresar a cualquier paso usando el stepper o los botones de edición en la previsualización.
 
 **¿El documento es legalmente válido?**
 El documento generado es una plantilla. Debe revisarlo y ajustarlo según sus necesidades específicas antes de presentarlo.
+
+**¿Dónde puedo aprender más sobre la tutela?**
+Visite nuestras secciones informativas en `/que-es`, `/participantes` y `/proceso` para comprender mejor el proceso.
 
 ---
 
@@ -280,32 +345,21 @@ TuteladoraActionForm/
 ├── public/                # Archivos estáticos públicos
 ├── src/
 │   ├── assets/           # Recursos estáticos
-│   │   └── images/       # Imágenes (logo, etc.)
+│   │   └── images/       # Imágenes (logo, default placeholders, etc.)
 │   ├── components/       # Componentes React
 │   │   ├── ui/          # Componentes UI reutilizables (shadcn/ui)
+│   │   ├── Navbar.tsx   # Barra de navegación reutilizable y responsiva
 │   │   ├── accionado-form.tsx
 │   │   ├── anexos-form.tsx
-│   │   ├── communication-form.tsx
-│   │   ├── derechos-form.tsx
-│   │   ├── hechos-form.tsx
-│   │   ├── personal-data-form.tsx
-│   │   ├── peticiones-form.tsx
-│   │   ├── preview.tsx
-│   │   └── stepper.tsx
-│   ├── data/            # Datos estáticos
-│   │   └── derechos.ts  # Lista de derechos fundamentales
-│   ├── services/        # Servicios y lógica de negocio
-│   │   ├── api.ts       # Servicio de API
-│   │   └── tourService.ts # Servicio de tours guiados
-│   ├── styles/          # Estilos globales
-│   │   └── globals.css  # Variables CSS y estilos base
-│   ├── types/           # Definiciones de TypeScript
-│   │   └── tutela.ts    # Interfaces y tipos
-│   ├── utils/           # Utilidades
-│   │   └── pdf-generator.ts # Generador de PDF
-│   ├── App.tsx          # Componente principal
+│   │   └── ...
+│   ├── pages/            # Páginas de la aplicación
+│   │   ├── Home.tsx      # Landing page optimizada
+│   │   ├── QueEsTutela.tsx
+│   │   ├── Participantes.tsx
+│   │   └── ProcesoTutela.tsx
+│   ├── App.tsx          # Router y configuración principal
 │   ├── main.tsx         # Punto de entrada
-│   └── index.css        # Estilos principales
+│   └── index.css        # Estilos principales y variables CSS
 ├── .gitignore
 ├── package.json
 ├── package-lock.json
@@ -502,12 +556,13 @@ El backend expone los siguientes endpoints principales:
 - `POST /generar-pdf`: Genera y retorna un documento PDF (opcional)
 - `GET /ejemplo-datos`: Retorna un ejemplo de la estructura de datos esperada
 
-### Gestión de Estado
+### Gestión de Estado y Persistencia
 
-La aplicación usa **React Hooks** para la gestión de estado:
+La aplicación usa **React Hooks** y **LocalStorage** para la gestión de estado:
 
-- `useState`: Para el estado local de cada componente y el estado global en `App.tsx`
-- No se usa Redux o Context API (puede agregarse si el proyecto crece)
+- `useState`: Para el estado local de cada componente y el estado global en `App.tsx`.
+- `useEffect`: Para manejar la sincronización con `localStorage` y el posicionamiento de la página.
+- **Persistencia**: Se utiliza `localStorage` con un tiempo de vida (TTL) de 1 hora. Se incluye un `timestamp` en el objeto guardado para validar la expiración al cargar y se realiza una limpieza automática en el componente `Preview` tras la generación exitosa.
 
 ### Componentes Principales
 

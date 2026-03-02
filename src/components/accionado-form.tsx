@@ -15,15 +15,28 @@ interface AccionadoFormProps {
 
 export function AccionadoForm({ data, onUpdate, onNext, onPrevious }: AccionadoFormProps) {
   const [formData, setFormData] = useState<AccionadoData>(data);
+  const [error, setError] = useState<string>('');
+
+  const validate = (value: string) => {
+    let newError = '';
+    if (value.trim() === '') {
+      newError = 'Este campo es requerido';
+    } else if (value.trim().length < 3) {
+      newError = 'El nombre es demasiado corto';
+    }
+    setError(newError);
+    return newError === '';
+  };
 
   const handleChange = (value: string) => {
     const newData = { nombre: value };
     setFormData(newData);
+    validate(value);
     onUpdate(newData);
   };
 
   const isFormValid = () => {
-    return formData.nombre.trim() !== '';
+    return formData.nombre.trim() !== '' && error === '';
   };
 
   return (
@@ -43,15 +56,17 @@ export function AccionadoForm({ data, onUpdate, onNext, onPrevious }: AccionadoF
             value={formData.nombre}
             onChange={(e) => handleChange(e.target.value)}
             placeholder="Ej: Ministerio de Salud y Protección Social"
+            className={error ? 'border-destructive' : ''}
           />
+          {error && <p className="text-xs text-destructive">{error}</p>}
         </div>
 
         <div className="flex justify-between pt-4">
           <Button onClick={onPrevious}>
             Anterior
           </Button>
-          <Button 
-            onClick={onNext} 
+          <Button
+            onClick={onNext}
             disabled={!isFormValid()}
           >
             Siguiente

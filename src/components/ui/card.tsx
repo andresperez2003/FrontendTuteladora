@@ -2,12 +2,18 @@ import * as React from "react";
 
 import { cn } from "./utils";
 
-function Card({ className, ...props }: React.ComponentProps<"div">) {
+interface CardProps extends React.ComponentProps<"div"> {
+  variant?: "default" | "carousel";
+}
+
+function Card({ className, variant = "default", ...props }: CardProps) {
   return (
     <div
       data-slot="card"
       className={cn(
-        "bg-card text-card-foreground flex flex-col gap-6 rounded-xl border",
+        "bg-card text-card-foreground flex flex-col rounded-xl border",
+        variant === "default" && "gap-6",
+        variant === "carousel" && "gap-0 overflow-hidden md:h-[448px]",
         className,
       )}
       {...props}

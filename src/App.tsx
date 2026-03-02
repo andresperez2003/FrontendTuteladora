@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { TutelaData, PersonalData, AccionadoData, Hecho, DerechoFundamental, Anexo, CommunicationData, Peticion } from './types/tutela';
 import { Stepper } from './components/stepper';
 import { PersonalDataForm } from './components/personal-data-form';
@@ -14,7 +14,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './com
 import { Badge } from './components/ui/badge';
 import { Button } from './components/ui/button';
 import { Scale, HelpCircle } from 'lucide-react';
-import logoImage from './assets/images/Logo.png';
+import { Navbar } from './components/Navbar';
+import { Footer } from './components/Footer';
 
 import { tourService } from './services/tourService';
 
@@ -52,6 +53,9 @@ const initialPeticiones: Peticion = {
   accionEspecifica: ''
 };
 
+const STORAGE_KEY = 'tutela_form_data';
+const MAX_AGE = 60 * 60 * 1000; // 1 hora en milisegundos
+
 export default function App() {
   const [currentStep, setCurrentStep] = useState(0);
   const [tutelaData, setTutelaData] = useState<TutelaData>({
@@ -63,6 +67,38 @@ export default function App() {
     communicationData: initialCommunicationData,
     peticiones: initialPeticiones
   });
+
+  // Load data from localStorage on mount
+  useEffect(() => {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      try {
+        const { data, step, timestamp } = JSON.parse(saved);
+
+        // Verificar si los datos han expirado (1 hora)
+        const isExpired = timestamp && (Date.now() - timestamp > MAX_AGE);
+
+        if (isExpired) {
+          localStorage.removeItem(STORAGE_KEY);
+          return;
+        }
+
+        if (data) setTutelaData(data);
+        if (typeof step === 'number') setCurrentStep(step);
+      } catch (e) {
+        console.error('Error loading saved tutela data:', e);
+      }
+    }
+  }, []);
+
+  // Save data to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      data: tutelaData,
+      step: currentStep,
+      timestamp: Date.now()
+    }));
+  }, [tutelaData, currentStep]);
 
   const updatePersonalData = (data: PersonalData) => {
     setTutelaData(prev => ({ ...prev, personalData: data }));
@@ -222,31 +258,25 @@ export default function App() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="bg-primary text-primary-foreground py-2 px-6" data-tour="header">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between ">
-            <div className="flex items-center gap-3">
-              <img src={logoImage} alt="Logo" width={60} height={50} />
-              <div>
-                <h1 className="text-xl">Tuteladora del pueblo</h1>
-                <p className="text-xs opacity-90">Generador de Acciones de Tutela</p>
-              </div>
-            </div>
+      <Navbar data-tour="header" />
+
+      {/* Content */}
+      <div className="container mx-auto px-4 py-8 pt-8 max-w-4xl">
+        <div className="max-w-4xl mx-auto space-y-6">
+          {/* Help Button */}
+          <div className="flex justify-end">
             <Button
               size="sm"
               onClick={startTour}
               data-tour="tour-button"
+              variant="outline"
+              className="gap-2"
             >
-              <HelpCircle className="w-4 h-4 mr-2" />
-              <span>Ayuda</span>
+              <HelpCircle className="w-4 h-4" />
+              <span>¿Necesitas ayuda?</span>
             </Button>
           </div>
-        </div>
-      </div>
 
-      {/* Content */}
-      <div className="container mx-auto px-4 py-8">
-        <div className="max-w-4xl mx-auto space-y-6">
           {/* Progress */}
           <Card data-tour="progress-card">
             <CardHeader>
@@ -271,6 +301,7 @@ export default function App() {
           {renderCurrentStep()}
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

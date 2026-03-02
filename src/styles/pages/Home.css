@@ -1,0 +1,330 @@
+/* Home page styles */
+
+.home-wrapper {
+    min-height: 100vh;
+    background-color: #ffffff;
+}
+
+.hero-section {
+    background: linear-gradient(180deg, #f0f7ff 0%, #ffffff 100%);
+    padding: 8px 0 12px 0;
+    /* Extreme reduction */
+    text-align: center;
+}
+
+.hero-title {
+    color: #111827;
+    /* text-gray-900 */
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    margin-bottom: 8px;
+    /* Reduced from 16px */
+    font-size: 1.875rem;
+    /* text-3xl */
+}
+
+@media (min-width: 768px) {
+    .hero-title {
+        font-size: 2.25rem;
+        /* Balanced with compact design */
+    }
+}
+
+.hero-description {
+    color: #4b5563;
+    /* text-gray-600 */
+    max-width: 36rem;
+    /* More compact */
+    margin: 0 auto 16px auto;
+    /* Reduced from 24px */
+    line-height: 1.4;
+    font-size: 0.9375rem;
+}
+
+@media (min-width: 768px) {
+    .hero-description {
+        font-size: 1.125rem;
+    }
+}
+
+.hero-caption {
+    font-size: 0.75rem;
+    color: #6b7280;
+    /* text-gray-500 */
+    margin-top: 12px;
+    /* Reduced */
+    font-weight: 500;
+}
+
+.hero-button {
+    padding: 8px 16px;
+    /* More compact */
+    font-size: 0.875rem;
+    border-radius: 9999px;
+}
+
+@media (min-width: 768px) {
+    .hero-button {
+        padding: 12px 24px;
+        font-size: 1rem;
+    }
+}
+
+.carousel-section {
+    padding: 32px 0;
+    border-top: 1px solid #f3f4f6;
+    border-bottom: 1px solid #f3f4f6;
+    /* Subtle borders added for better definition */
+}
+
+.carousel-container-custom {
+    height: 450px;
+    /* Mobile height */
+    width: 95%;
+    /* Mobile width */
+    margin: 0 auto;
+    /* Center the carousel */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    border-radius: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .carousel-container-custom {
+        height: 600px;
+        /* Desktop height */
+        width: 85%;
+        /* Desktop width */
+    }
+}
+
+.carousel-content-custom {
+    height: 100%;
+}
+
+.carousel-item-custom {
+    height: 450px;
+    /* Mobile height */
+}
+
+@media (min-width: 768px) {
+    .carousel-item-custom {
+        height: 600px;
+        /* Desktop height */
+    }
+}
+
+.carousel-card-wrapper {
+    height: 100%;
+    padding: 0 4px;
+}
+
+.carousel-card-custom {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #e5eaf2 !important;
+    /* Thicker border */
+    border-radius: 1rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+    /* Shadow box */
+    overflow: hidden;
+    background-color: #ffffff;
+}
+
+.carousel-card-img {
+    height: 60%;
+    /* Mobile height - Adjusted for extra text space */
+    width: 100%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+    .carousel-card-img {
+        height: 75%;
+        /* Desktop height */
+    }
+}
+
+.carousel-card-text {
+    height: 40%;
+    /* Mobile height - Adjusted for extra text space */
+    padding: 16px 24px;
+    /* Reduced padding for compact mobile view */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+    .carousel-card-text {
+        height: 25%;
+        /* Desktop height */
+        padding: 24px;
+    }
+}
+
+.carousel-card-text h3 {
+    font-size: 1.25rem;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.carousel-card-text p {
+    font-size: 1rem;
+    color: #4b5563;
+    /* text-gray-600 */
+}
+
+.cta-section {
+    padding-bottom: 60px;
+}
+
+.cta-container-inner {
+    max-width: 42rem;
+    /* Compact 2xl container */
+    margin: 0 auto;
+    background-color: rgba(59, 130, 246, 0.05);
+    /* primary/5 */
+    border-radius: 1.5rem;
+    /* 3xl */
+    padding: 32px;
+    /* p-8 */
+    text-align: center;
+    border: 1px solid rgba(59, 130, 246, 0.1);
+    /* primary/10 */
+}
+
+@media (min-width: 768px) {
+    .cta-container-inner {
+        padding: 48px;
+        /* p-12 */
+    }
+}
+
+.spacer-sm {
+    height: 8px;
+    /* Reduced from 24px */
+}
+
+.spacer-lg {
+    height: 48px;
+}
+
+.video-section {
+    padding: 32px 0;
+}
+
+.video-container-main {
+    max-width: 900px;
+    width: 100%;
+}
+
+.video-aspect-ratio {
+    position: relative;
+    padding-bottom: 56.25%;
+    /* 16:9 ratio */
+    height: 0;
+    overflow: hidden;
+}
+
+.video-aspect-ratio iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.section-title {
+    font-size: 1.875rem;
+    font-weight: 800;
+    color: #111827;
+    letter-spacing: -0.025em;
+}
+
+.section-description {
+    font-size: 1rem;
+    color: #4b5563;
+    line-height: 1.6;
+}
+
+@media (min-width: 768px) {
+    .section-title {
+        font-size: 2.5rem;
+    }
+
+    .section-description {
+        font-size: 1.125rem;
+    }
+}
+
+/* Accessible Carousel Navigation - Positioned over Image */
+.carousel-nav-button {
+    width: 60px !important;
+    height: 60px !important;
+    background-color: var(--primary) !important;
+    color: white !important;
+    opacity: 0.4 !important;
+    border: none !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
+    z-index: 30;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px !important;
+    position: absolute !important;
+    top: 40% !important;
+    /* Midpoint of mobile image (80%) */
+    transform: translateY(-50%) !important;
+}
+
+.carousel-nav-button:hover {
+    background-color: #1a56cc !important;
+    transform: translateY(-50%) scale(1.1) !important;
+    opacity: 1 !important;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.carousel-nav-button svg {
+    width: 32px !important;
+    height: 32px !important;
+    stroke-width: 3px;
+}
+
+@media (min-width: 768px) {
+    .carousel-nav-button {
+        top: 37.5% !important;
+        /* Midpoint of desktop image (75%) */
+        width: 52px !important;
+        height: 52px !important;
+    }
+
+    .carousel-nav-button svg {
+        width: 28px !important;
+        height: 28px !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .carousel-nav-button {
+        display: none !important;
+    }
+}
+
+/* Accessibility - Hide labels from sighted users */
+.sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border-width: 0 !important;
+}
