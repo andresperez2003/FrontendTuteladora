@@ -278,24 +278,14 @@ export default function App() {
           </div>
 
           {/* Progress */}
-          <Card data-tour="progress-card">
-            <CardHeader>
-              <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-                <CardTitle className="text-lg">
-                  Paso {currentStep + 1} de {steps.length}
-                </CardTitle>
-                <Badge variant="secondary" className="w-fit">
-                  {steps[currentStep]}
-                </Badge>
-              </div>
-              <CardDescription>
-                Complete cada paso para generar su acción de tutela
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Stepper steps={steps} currentStep={currentStep} data-tour="stepper" />
-            </CardContent>
-          </Card>
+          <div data-tour="progress-card" className="flex items-center gap-2 px-1">
+            <span className="text-sm text-muted-foreground">
+              Paso {currentStep + 1} de {steps.length}
+            </span>
+            <Badge variant="default" className="w-fit font-bold">
+              {steps[currentStep]}
+            </Badge>
+          </div>
 
           {/* Current Step Content */}
           {renderCurrentStep()}
