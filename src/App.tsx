@@ -16,6 +16,8 @@ import { Button } from './components/ui/button';
 import { Scale, HelpCircle } from 'lucide-react';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
+import { StepInfoPanel } from './components/StepInfoPanel';
+import { DerechoDetailPanel } from './components/DerechoDetailPanel';
 
 import { tourService } from './services/tourService';
 
@@ -67,6 +69,7 @@ export default function App() {
     communicationData: initialCommunicationData,
     peticiones: initialPeticiones
   });
+  const [lastClickedDerecho, setLastClickedDerecho] = useState<DerechoFundamental | null>(null);
 
   // Load data from localStorage on mount
   useEffect(() => {
@@ -213,6 +216,7 @@ export default function App() {
             onUpdate={updateDerechos}
             onNext={nextStep}
             onPrevious={previousStep}
+            onDerechoClick={setLastClickedDerecho}
           />
         );
       case 4:
@@ -261,8 +265,8 @@ export default function App() {
       <Navbar data-tour="header" />
 
       {/* Content */}
-      <div className="container mx-auto px-4 py-8 pt-8 max-w-4xl">
-        <div className="max-w-4xl mx-auto space-y-6">
+      <div className="container mx-auto px-4 py-8 pt-8 max-w-6xl">
+        <div className="max-w-6xl mx-auto space-y-6">
           {/* Help Button */}
           <div className="flex justify-end">
             <Button
@@ -287,8 +291,22 @@ export default function App() {
             </Badge>
           </div>
 
-          {/* Current Step Content */}
-          {renderCurrentStep()}
+          {/* Two-column layout: info panel + form */}
+          <div className="flex flex-row gap-6 items-start">
+            {/* Left — Contextual info (35%), hidden on mobile via CSS class */}
+            <div className="info-panel-side space-y-5">
+              {currentStep !== 3 ? (
+                <StepInfoPanel currentStep={currentStep} />
+              ) : (
+                <DerechoDetailPanel derecho={lastClickedDerecho} />
+              )}
+            </div>
+
+            {/* Right — Form (65%) */}
+            <div className="form-content-side min-w-0">
+              {renderCurrentStep()}
+            </div>
+          </div>
         </div>
       </div>
       <Footer />

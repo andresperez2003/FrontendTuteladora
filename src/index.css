@@ -416,13 +416,31 @@
     font-weight: var(--font-weight-medium);
     line-height: 1.5;
   }
+}
 
-  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) input {
-    font-size: var(--text-base);
-    font-weight: var(--font-weight-normal);
-    line-height: 1.5;
+/* Custom Response Info Panel Layout */
+.info-panel-side {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .info-panel-side {
+    display: block;
+    width: 35%;
+    flex-shrink: 0;
   }
 }
+
+.form-content-side {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .form-content-side {
+    flex: 1;
+  }
+}
+
 
 @layer utilities {
   .\@container\/card-header {
