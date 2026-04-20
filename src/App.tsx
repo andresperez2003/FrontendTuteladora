@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { TutelaData, PersonalData, AccionadoData, Hecho, DerechoFundamental, Anexo, CommunicationData, Peticion } from './types/tutela';
 import { Stepper } from './components/stepper';
 import { PersonalDataForm } from './components/personal-data-form';
@@ -9,13 +10,14 @@ import { AnexosForm } from './components/anexos-form';
 import { CommunicationForm } from './components/communication-form';
 import { PeticionesForm } from './components/peticiones-form';
 import { Preview } from './components/preview';
-// import { generateTutelaPDF } from './utils/pdf-generator'; // Ya no se usa, ahora se genera desde el backend
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './components/ui/card';
 import { Badge } from './components/ui/badge';
 import { Button } from './components/ui/button';
-import { Scale, HelpCircle } from 'lucide-react';
+import { Scale, HelpCircle, Info, X as XIcon } from 'lucide-react';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
+import { StepInfoPanel, stepData } from './components/StepInfoPanel';
+import { DerechoDetailPanel } from './components/DerechoDetailPanel';
 
 import { tourService } from './services/tourService';
 
@@ -67,6 +69,16 @@ export default function App() {
     communicationData: initialCommunicationData,
     peticiones: initialPeticiones
   });
+  const [lastClickedDerecho, setLastClickedDerecho] = useState<DerechoFundamental | null>(null);
+  const [mobileInfoOpen, setMobileInfoOpen] = useState(false);
+  const [isAppMobile, setIsAppMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsAppMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Load data from localStorage on mount
   useEffect(() => {
@@ -131,17 +143,20 @@ export default function App() {
   const nextStep = () => {
     if (currentStep < steps.length - 1) {
       setCurrentStep(currentStep + 1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
   const previousStep = () => {
     if (currentStep > 0) {
       setCurrentStep(currentStep - 1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
   const goToStep = (step: number) => {
     setCurrentStep(step);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const startTour = () => {
@@ -213,6 +228,7 @@ export default function App() {
             onUpdate={updateDerechos}
             onNext={nextStep}
             onPrevious={previousStep}
+            onDerechoClick={setLastClickedDerecho}
           />
         );
       case 4:
@@ -261,10 +277,29 @@ export default function App() {
       <Navbar data-tour="header" />
 
       {/* Content */}
-      <div className="container mx-auto px-4 py-8 pt-8 max-w-4xl">
-        <div className="max-w-4xl mx-auto space-y-6">
-          {/* Help Button */}
-          <div className="flex justify-end">
+      <div className="container mx-auto px-4 py-8 pt-8 max-w-6xl">
+        <div className="max-w-6xl mx-auto space-y-6">
+          {/* Help & Info Buttons */}
+          <div className="flex justify-end gap-2">
+            {/* Mobile Only: Información del paso */}
+            {isAppMobile && (
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  console.log("MOBILE BOTON CLICK: abriendo modal...");
+                  setMobileInfoOpen(true);
+                }}
+                className="flex items-center justify-center gap-2 cursor-pointer h-9 px-3 z-50 relative"
+                title="Mostrar información"
+              >
+                <Info className="w-4 h-4" />
+                <span>Información del paso</span>
+              </Button>
+            )}
+
+            {/* General Tour Button */}
             <Button
               size="sm"
               onClick={startTour}
@@ -273,35 +308,63 @@ export default function App() {
               className="gap-2"
             >
               <HelpCircle className="w-4 h-4" />
-              <span>¿Necesitas ayuda?</span>
+              <span className="hidden sm:inline">¿Necesitas ayuda?</span>
+              <span className="sm:hidden">Ayuda</span>
             </Button>
           </div>
 
           {/* Progress */}
-          <Card data-tour="progress-card">
-            <CardHeader>
-              <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-                <CardTitle className="text-lg">
-                  Paso {currentStep + 1} de {steps.length}
-                </CardTitle>
-                <Badge variant="secondary" className="w-fit">
-                  {steps[currentStep]}
-                </Badge>
-              </div>
-              <CardDescription>
-                Complete cada paso para generar su acción de tutela
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Stepper steps={steps} currentStep={currentStep} data-tour="stepper" />
-            </CardContent>
-          </Card>
+          <div data-tour="progress-card" className="flex items-center gap-2 px-1">
+            <span className="text-sm text-muted-foreground">
+              Paso {currentStep + 1} de {steps.length}
+            </span>
+            <Badge variant="default" className="w-fit font-bold">
+              {steps[currentStep]}
+            </Badge>
+          </div>
 
-          {/* Current Step Content */}
-          {renderCurrentStep()}
+          {/* Two-column layout: info panel + form */}
+          <div className="flex flex-row gap-6 items-start">
+            {/* Left — Contextual info (35%), hidden on mobile via CSS class */}
+            <div className="info-panel-side space-y-5">
+              {currentStep !== 3 ? (
+                <StepInfoPanel currentStep={currentStep} />
+              ) : (
+                <DerechoDetailPanel derecho={lastClickedDerecho} />
+              )}
+            </div>
+
+            {/* Right — Form (65%) */}
+            <div className="form-content-side min-w-0">
+              {renderCurrentStep()}
+            </div>
+          </div>
         </div>
       </div>
       <Footer />
+
+      {/* Native Mobile Custom Sheet */}
+      {mobileInfoOpen && createPortal(
+        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 99999, backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
+          <div style={{ backgroundColor: 'white', width: '100%', height: '85vh', borderTopLeftRadius: '24px', borderTopRightRadius: '24px', padding: '24px', position: 'relative' }}>
+            <button 
+              onClick={() => setMobileInfoOpen(false)}
+              style={{ position: 'absolute', top: '16px', right: '16px', padding: '8px', backgroundColor: '#f1f5f9', borderRadius: '50%', zIndex: 999999, border: 'none', cursor: 'pointer', fontWeight: 'bold' }}
+            >
+              X Cerrar
+            </button>
+            <div style={{ overflowY: 'auto', height: '100%', marginTop: '40px' }}>
+              <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#0f172a' }}>
+                 {currentStep !== 3 ? (stepData[currentStep]?.title || "Información del paso") : (lastClickedDerecho?.nombre || "Derechos Fundamentales")}
+              </h2>
+              <p style={{ marginTop: '16px', color: '#334155', fontSize: '16px', lineHeight: '1.6' }}>
+                 {currentStep !== 3 ? (stepData[currentStep]?.description || "Descripción no disponible.") : (lastClickedDerecho?.descripcion || "Seleccione un derecho para ver su descripción.")}
+              </p>
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
     </div>
   );
 }
