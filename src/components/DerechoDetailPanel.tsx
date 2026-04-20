@@ -10,7 +10,7 @@ interface DerechoDetailPanelProps {
 
 export function DerechoDetailPanel({ derecho }: DerechoDetailPanelProps) {
   return (
-    <div className="flex flex-col gap-6 animate-in fade-in slide-in-from-left-4 duration-700">
+    <div className="flex flex-col gap-6 w-full">
       {/* Premium Unified Card */}
       <Card className="overflow-hidden border-none shadow-xl bg-gradient-to-b from-card to-muted/20">
         {/* Header Image with Overlay */}
@@ -92,7 +92,7 @@ export function DerechoDetailPanel({ derecho }: DerechoDetailPanelProps) {
           {/* Footer Tip */}
           <div className="pt-2">
             <p className="text-[11px] text-center text-muted-foreground leading-relaxed italic border-t border-border/40 pt-4 px-2">
-              ✨ Si tiene dudas sobre el derecho exacto, el juez realizará el análisis jurídico necesario para identificar y proteger los derechos que correspondan.
+              Si tiene dudas sobre el derecho exacto, el juez realizará el análisis jurídico necesario para identificar y proteger los derechos que correspondan.
             </p>
           </div>
         </CardContent>

@@ -14,14 +14,14 @@ import { Card, CardContent } from './ui/card';
 import { Badge } from './ui/badge';
 import defaultImage from '../assets/images/INFOdefault.jpg';
 
-interface StepInfo {
+export interface StepInfo {
   icon: LucideIcon;
   title: string;
   description: string;
   tip: string;
 }
 
-const stepData: StepInfo[] = [
+export const stepData: StepInfo[] = [
   {
     icon: User,
     title: 'Información de Identificación',
@@ -89,12 +89,12 @@ export function StepInfoPanel({ currentStep }: StepInfoPanelProps) {
   const Icon = info.icon;
 
   return (
-    <div className="flex flex-col gap-6 animate-in fade-in slide-in-from-left-4 duration-700">
+    <div className="flex flex-col gap-6 w-full">
       <Card className="overflow-hidden border-none shadow-xl bg-gradient-to-b from-card to-muted/20">
         <div className="relative h-44 w-full overflow-hidden">
-          <img 
-            src={defaultImage} 
-            alt="Información del paso" 
+          <img
+            src={defaultImage}
+            alt="Información del paso"
             className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent" />
@@ -113,7 +113,7 @@ export function StepInfoPanel({ currentStep }: StepInfoPanelProps) {
         <CardContent className="p-6 space-y-6">
           <div className="flex gap-3 items-start p-4 rounded-xl bg-primary/5 border border-primary/10">
             <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-               <Icon className="w-4 h-4 text-primary" />
+              <Icon className="w-4 h-4 text-primary" />
             </div>
             <p className="text-xs text-muted-foreground leading-relaxed">
               {info.description}
@@ -122,7 +122,7 @@ export function StepInfoPanel({ currentStep }: StepInfoPanelProps) {
 
           <div className="pt-2">
             <p className="text-[11px] text-center text-muted-foreground leading-relaxed italic border-t border-border/40 pt-4 px-2">
-              ✨ {info.tip}
+              {info.tip}
             </p>
           </div>
         </CardContent>

@@ -22,14 +22,29 @@ export function DerechosForm({ data, onUpdate, onNext, onPrevious, onDerechoClic
   const [selectedDerechos, setSelectedDerechos] = useState<DerechoFundamental[]>(data);
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(8);
+  const itemsPerPage = 9; // Desktop only
+  const [isMobile, setIsMobile] = useState(false);
+  const [isScrolling, setIsScrolling] = useState(false);
+  const [blink, setBlink] = useState(false);
+  const scrollTimeout = React.useRef<number | NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (!isScrolling && isMobile) {
+      interval = setInterval(() => {
+        setBlink(prev => !prev);
+      }, 700);
+    } else {
+      setBlink(true); // Fijo cuando srollea
+    }
+    return () => clearInterval(interval);
+  }, [isScrolling, isMobile]);
 
   useEffect(() => {
     const handleResize = () => {
-      // 4 for mobile (1 col), 9 for desktop (3 cols)
-      setItemsPerPage(window.innerWidth < 768 ? 4 : 9);
+      setIsMobile(window.innerWidth < 768);
     };
-    
+
     handleResize(); // Initial call
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
@@ -50,16 +65,19 @@ export function DerechosForm({ data, onUpdate, onNext, onPrevious, onDerechoClic
     return selectedDerechos.some(d => d.nombre === derecho.nombre);
   };
 
-  const filteredDerechos = derechosFundamentales.filter(derecho => 
+  const filteredDerechos = derechosFundamentales.filter(derecho =>
     derecho.nombre.toLowerCase().includes(searchQuery.toLowerCase()) ||
     derecho.articulo.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const totalPages = Math.ceil(filteredDerechos.length / itemsPerPage);
-  const paginatedDerechos = filteredDerechos.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
+  // On mobile show all; on desktop paginate
+  const displayedDerechos = isMobile
+    ? filteredDerechos
+    : filteredDerechos.slice(
+      (currentPage - 1) * itemsPerPage,
+      currentPage * itemsPerPage
+    );
 
   const handleSearchChange = (query: string) => {
     setSearchQuery(query);
@@ -91,102 +109,198 @@ export function DerechosForm({ data, onUpdate, onNext, onPrevious, onDerechoClic
             />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 pr-1">
-            {paginatedDerechos.length > 0 ? (
-              paginatedDerechos.map((derecho) => {
-                const selected = isDerechoSelected(derecho);
-                return (
-                  <div 
-                    key={derecho.nombre} 
-                    onClick={() => {
-                      handleDerechoToggle(derecho, !selected);
-                      onDerechoClick(derecho);
-                    }}
-                    className={`
-                      flex items-start space-x-2 p-3 border rounded-xl cursor-pointer transition-all duration-200
-                      ${selected 
-                        ? 'border-primary bg-primary/5 shadow-sm ring-1 ring-primary/20' 
-                        : 'border-border bg-card hover:border-primary/50 hover:bg-muted/50'}
-                    `}
-                  >
-                    <Checkbox
-                      checked={selected}
-                      onCheckedChange={() => {}} // Manejado por el onClick del div
-                      className="mt-1 pointer-events-none"
-                    />
-                    <div className="flex-1 space-y-1">
-                      <div className="flex items-center gap-2">
-                        <Badge variant={selected ? "default" : "outline"} className="text-[10px] h-5">
-                          {derecho.articulo}
-                        </Badge>
-                        <span className={`text-sm font-semibold ${selected ? 'text-primary' : 'text-foreground'}`}>
-                          {derecho.nombre}
-                        </span>
-                      </div>
-                      <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">
-                        {derecho.descripcion}
-                      </p>
-                    </div>
-                  </div>
-                );
-              })
-            ) : (
-              <div className="col-span-full py-12 text-center space-y-2 bg-muted/20 rounded-2xl border border-dashed">
-                <p className="font-medium text-muted-foreground">No encontramos nada con "{searchQuery}"</p>
-                <Button variant="link" onClick={() => handleSearchChange('')} className="text-primary">
-                  Ver todos los derechos
-                </Button>
-              </div>
-            )}
-          </div>
+          {/* Mobile: scroll propio sin paginación */}
+          {isMobile ? (
+            <>              <style>{`
+                /* Native Firefox */
+                .force-native-scroll {
+                  scrollbar-width: thin;
+                  scrollbar-color: ${blink ? 'rgba(59,130,246,0.8)' : 'rgba(59,130,246,0.2)'} transparent;
+                  transition: scrollbar-color 0.7s;
+                }
 
-          {/* Pagination Controls */}
-          {totalPages > 1 && (
-            <div className="flex items-center justify-center gap-1 sm:gap-2 pt-4 px-2 overflow-hidden">
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
-                disabled={currentPage === 1}
-                className="h-8 w-8 shrink-0"
+                /* Native Webkit (Chrome, Safari, Edge) */
+                .force-native-scroll::-webkit-scrollbar {
+                  width: 8px;
+                }
+                .force-native-scroll::-webkit-scrollbar-track {
+                  background: transparent;
+                }
+                
+                /* Toggled classes driven by React state to bypass CSS animation limits */
+                .thumb-bright::-webkit-scrollbar-thumb {
+                  border-radius: 10px;
+                  background-color: rgba(59, 130, 246, 0.9);
+                  border: 2px solid transparent;
+                  background-clip: padding-box;
+                }
+                
+                .thumb-dim::-webkit-scrollbar-thumb {
+                  border-radius: 10px;
+                  background-color: rgba(59, 130, 246, 0.2);
+                  border: 2px solid transparent;
+                  background-clip: padding-box;
+                }
+              `}</style>
+              <div 
+                style={{ height: '350px', maxHeight: '350px', overflowY: 'auto' }} 
+                className={`force-native-scroll border border-border rounded-xl p-2 bg-card scroll-smooth transition-all duration-300 transform-gpu ${blink ? 'thumb-bright' : 'thumb-dim'} ${!isScrolling ? 'border-primary/50 shadow-[0_0_8px_rgba(59,130,246,0.2)]' : 'border-border'}`}
+                onScroll={() => {
+                  setIsScrolling(true);
+                  if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+                  scrollTimeout.current = setTimeout(() => setIsScrolling(false), 800);
+                }}
               >
-                <ChevronLeft className="h-4 w-4" />
-              </Button>
-              
-              <div className="flex items-center gap-1 max-w-full overflow-hidden">
-                {Array.from({ length: totalPages }, (_, i) => i + 1)
-                  .filter(page => {
-                    // Show first, last, current and neighbors
-                    if (totalPages <= 5) return true;
-                    return page === 1 || page === totalPages || Math.abs(page - currentPage) <= 1;
-                  })
-                  .map((page, index, array) => (
-                    <React.Fragment key={page}>
-                      {index > 0 && page - array[index - 1] > 1 && (
-                        <span className="text-muted-foreground px-1 text-xs">...</span>
-                      )}
-                      <Button
-                        variant={currentPage === page ? "default" : "ghost"}
-                        size="sm"
-                        onClick={() => setCurrentPage(page)}
-                        className={`h-8 w-8 p-0 text-xs shrink-0 ${currentPage === page ? 'shadow-sm' : ''}`}
-                      >
-                        {page}
+                <div className="grid grid-cols-1 gap-3 pr-2">
+                  {displayedDerechos.length > 0 ? (
+                    displayedDerechos.map((derecho) => {
+                      const selected = isDerechoSelected(derecho);
+                      return (
+                        <div
+                          key={derecho.nombre}
+                          onClick={() => {
+                            handleDerechoToggle(derecho, !selected);
+                            onDerechoClick(derecho);
+                          }}
+                          className={`
+                            flex items-start space-x-2 p-3 border rounded-xl cursor-pointer transition-all duration-200
+                            ${selected
+                              ? 'border-primary bg-primary/5 shadow-sm ring-1 ring-primary/20'
+                              : 'border-border bg-card hover:border-primary/50 hover:bg-muted/50'}
+                          `}
+                        >
+                          <Checkbox
+                            checked={selected}
+                            onCheckedChange={() => { }}
+                            className="mt-1 pointer-events-none"
+                          />
+                          <div className="flex-1 space-y-1">
+                            <div className="flex items-center gap-2">
+                              <Badge variant={selected ? "default" : "outline"} className="text-[10px] h-5">
+                                {derecho.articulo}
+                              </Badge>
+                              <span className={`text-sm font-semibold ${selected ? 'text-primary' : 'text-foreground'}`}>
+                                {derecho.nombre}
+                              </span>
+                            </div>
+                            <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">
+                              {derecho.descripcion}
+                            </p>
+                          </div>
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <div className="py-12 text-center space-y-2 bg-muted/20 rounded-2xl border border-dashed">
+                      <p className="font-medium text-muted-foreground">No encontramos nada con "{searchQuery}"</p>
+                      <Button variant="link" onClick={() => handleSearchChange('')} className="text-primary">
+                        Ver todos los derechos
                       </Button>
-                    </React.Fragment>
-                  ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
+              {/* Desktop: grid con paginación */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 pr-1">
+                {displayedDerechos.length > 0 ? (
+                  displayedDerechos.map((derecho) => {
+                    const selected = isDerechoSelected(derecho);
+                    return (
+                      <div
+                        key={derecho.nombre}
+                        onClick={() => {
+                          handleDerechoToggle(derecho, !selected);
+                          onDerechoClick(derecho);
+                        }}
+                        className={`
+                          flex items-start space-x-2 p-3 border rounded-xl cursor-pointer transition-all duration-200
+                          ${selected
+                            ? 'border-primary bg-primary/5 shadow-sm ring-1 ring-primary/20'
+                            : 'border-border bg-card hover:border-primary/50 hover:bg-muted/50'}
+                        `}
+                      >
+                        <Checkbox
+                          checked={selected}
+                          onCheckedChange={() => { }}
+                          className="mt-1 pointer-events-none"
+                        />
+                        <div className="flex-1 space-y-1">
+                          <div className="flex items-center gap-2">
+                            <Badge variant={selected ? "default" : "outline"} className="text-[10px] h-5">
+                              {derecho.articulo}
+                            </Badge>
+                            <span className={`text-sm font-semibold ${selected ? 'text-primary' : 'text-foreground'}`}>
+                              {derecho.nombre}
+                            </span>
+                          </div>
+                          <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">
+                            {derecho.descripcion}
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <div className="col-span-full py-12 text-center space-y-2 bg-muted/20 rounded-2xl border border-dashed">
+                    <p className="font-medium text-muted-foreground">No encontramos nada con "{searchQuery}"</p>
+                    <Button variant="link" onClick={() => handleSearchChange('')} className="text-primary">
+                      Ver todos los derechos
+                    </Button>
+                  </div>
+                )}
               </div>
 
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
-                disabled={currentPage === totalPages}
-                className="h-8 w-8 shrink-0"
-              >
-                <ChevronRight className="h-4 w-4" />
-              </Button>
-            </div>
+              {/* Pagination Controls - Desktop only */}
+              {totalPages > 1 && (
+                <div className="flex items-center justify-center gap-1 sm:gap-2 pt-4 px-2 overflow-hidden">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                    disabled={currentPage === 1}
+                    className="h-8 w-8 shrink-0"
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </Button>
+
+                  <div className="flex items-center gap-1 max-w-full overflow-hidden">
+                    {Array.from({ length: totalPages }, (_, i) => i + 1)
+                      .filter(page => {
+                        if (totalPages <= 5) return true;
+                        return page === 1 || page === totalPages || Math.abs(page - currentPage) <= 1;
+                      })
+                      .map((page, index, array) => (
+                        <React.Fragment key={page}>
+                          {index > 0 && page - array[index - 1] > 1 && (
+                            <span className="text-muted-foreground px-1 text-xs">...</span>
+                          )}
+                          <Button
+                            variant={currentPage === page ? "default" : "ghost"}
+                            size="sm"
+                            onClick={() => setCurrentPage(page)}
+                            className={`h-8 w-8 p-0 text-xs shrink-0 ${currentPage === page ? 'shadow-sm' : ''}`}
+                          >
+                            {page}
+                          </Button>
+                        </React.Fragment>
+                      ))}
+                  </div>
+
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                    disabled={currentPage === totalPages}
+                    className="h-8 w-8 shrink-0"
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </Button>
+                </div>
+              )}
+            </>
           )}
         </div>
 
@@ -194,8 +308,8 @@ export function DerechosForm({ data, onUpdate, onNext, onPrevious, onDerechoClic
           <Button onClick={onPrevious}>
             Anterior
           </Button>
-          <Button 
-            onClick={onNext} 
+          <Button
+            onClick={onNext}
             disabled={!isFormValid()}
           >
             Siguiente
